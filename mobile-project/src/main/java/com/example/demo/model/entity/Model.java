@@ -27,8 +27,8 @@ public class Model extends BaseEntity{
 	@Column
 	private int startYear;
 	
-	@Column
-	private int endYear;
+	@Column(nullable = true)
+	private Integer endYear;
 
 	@ManyToOne
 	private Brand brand;
@@ -65,7 +65,7 @@ public class Model extends BaseEntity{
 		this.startYear = startYear;
 	}
 
-	public int getEndYear() {
+	public Integer getEndYear() {
 		return endYear;
 	}
 
