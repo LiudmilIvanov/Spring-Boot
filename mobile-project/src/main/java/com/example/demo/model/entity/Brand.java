@@ -1,4 +1,4 @@
-package com.example.demo.entities;
+package com.example.demo.model.entity;
 
 import java.time.Instant;
 

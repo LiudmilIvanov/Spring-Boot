@@ -1,4 +1,4 @@
-package com.example.demo.entities;
+package com.example.demo.model.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -7,7 +7,7 @@ import javax.persistence.Enumerated;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import com.example.demo.entities.enums.ModelCategory;
+import com.example.demo.model.entity.enums.ModelCategory;
 
 import io.micrometer.core.annotation.Counted;
 

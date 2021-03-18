@@ -1,9 +1,9 @@
-package com.example.demo.entities;
+package com.example.demo.model.entity;
 
 import javax.persistence.Table;
 
-import com.example.demo.entities.enums.EngineType;
-import com.example.demo.entities.enums.TransmissionType;
+import com.example.demo.model.entity.enums.EngineType;
+import com.example.demo.model.entity.enums.TransmissionType;
 
 import java.math.BigDecimal;
 

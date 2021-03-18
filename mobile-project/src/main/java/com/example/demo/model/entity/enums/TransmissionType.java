@@ -1,4 +1,4 @@
-package com.example.demo.entities.enums;
+package com.example.demo.model.entity.enums;
 
 public enum TransmissionType {
 

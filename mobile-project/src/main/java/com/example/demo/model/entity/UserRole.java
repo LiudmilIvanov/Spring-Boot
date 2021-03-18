@@ -1,4 +1,4 @@
-package com.example.demo.entities;
+package com.example.demo.model.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -8,7 +8,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import com.example.demo.entities.enums.UserRoleEnum;
+import com.example.demo.model.entity.enums.UserRoleEnum;
+
 
 @Entity
 @Table(name = "user_roles")
