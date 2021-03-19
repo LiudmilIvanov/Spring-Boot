@@ -1,12 +1,13 @@
 package com.example.demo.model.view;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class BrandViewModel {
 
 	private String name;
 
-	private List<ModelViewModel> models;
+	private List<ModelViewModel> models = new ArrayList<ModelViewModel>();
 	
 	public List<ModelViewModel> getModels() {
 		return models;
@@ -28,6 +29,8 @@ public class BrandViewModel {
 
 	}
 	
-	
+	public void addModel(ModelViewModel modelViewModel) {
+		this.getModels().add(modelViewModel);
+	}
 	
 }

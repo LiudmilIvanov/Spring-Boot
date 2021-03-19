@@ -30,7 +30,7 @@ public class DBInit implements CommandLineRunner{
 	@Transactional
 	@Override
 	public void run(String... args) throws Exception {
-		Brand fordBrand = new Brand();
+	/*	Brand fordBrand = new Brand();
 		fordBrand.setName("Ford");
 		fordBrand.setCreated(Instant.now());
 		fordBrand.setUpdated(Instant.now());
@@ -43,9 +43,9 @@ public class DBInit implements CommandLineRunner{
 		hondaBrand.setCreated(Instant.now());
 		hondaBrand.setUpdated(Instant.now());
 		
-		Model honda = initNC750S(hondaBrand);
+		Model honda = initNC750S(hondaBrand);*/
 		
-		brandRepository.saveAll(List.of(fordBrand, hondaBrand));
+	//	brandRepository.saveAll(List.of(fordBrand, hondaBrand));
 		
 		
 		

@@ -8,4 +8,5 @@ import com.example.demo.model.entity.Brand;
 @Repository
 public interface BrandRepository extends JpaRepository<Brand, Long>{
 
+	Brand findByName(String name);
 }
