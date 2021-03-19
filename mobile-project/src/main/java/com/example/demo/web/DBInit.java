@@ -1,5 +1,6 @@
 package com.example.demo.web;
 
+import java.math.BigDecimal;
 import java.time.Instant;
 import java.util.List;
 
@@ -11,26 +12,33 @@ import org.springframework.stereotype.Component;
 
 import com.example.demo.model.entity.Brand;
 import com.example.demo.model.entity.Model;
+import com.example.demo.model.entity.Offer;
+import com.example.demo.model.entity.enums.EngineType;
 import com.example.demo.model.entity.enums.ModelCategory;
+import com.example.demo.model.entity.enums.TransmissionType;
 import com.example.demo.repositories.BrandRepository;
 import com.example.demo.repositories.ModelRepository;
+import com.example.demo.repositories.OfferRepository;
 
 @Component
 public class DBInit implements CommandLineRunner{
 
 	private final ModelRepository modelRepository;
 	private final BrandRepository brandRepository;
+	private final OfferRepository offerRepository;
 	
 	@Autowired
-	public DBInit(ModelRepository modelRepository, BrandRepository brandRepository) {
+	public DBInit(ModelRepository modelRepository, BrandRepository brandRepository, 
+			OfferRepository offerRepository) {
 		this.modelRepository = modelRepository;
 		this.brandRepository = brandRepository;
+		this.offerRepository = offerRepository;
 	}
 
 	@Transactional
 	@Override
 	public void run(String... args) throws Exception {
-	/*	Brand fordBrand = new Brand();
+		Brand fordBrand = new Brand();
 		fordBrand.setName("Ford");
 		fordBrand.setCreated(Instant.now());
 		fordBrand.setUpdated(Instant.now());
@@ -43,14 +51,31 @@ public class DBInit implements CommandLineRunner{
 		hondaBrand.setCreated(Instant.now());
 		hondaBrand.setUpdated(Instant.now());
 		
-		Model honda = initNC750S(hondaBrand);*/
+		Model honda = initNC750S(hondaBrand);
 		
-	//	brandRepository.saveAll(List.of(fordBrand, hondaBrand));
+		brandRepository.saveAll(List.of(fordBrand, hondaBrand));
 		
+		Model fiestaModel = initFiest(fordBrand);
+		createFiestaOffer(fiestaModel);
 		
 		
 	}
-
+	private void createFiestaOffer(Model model) {
+		Offer fiestaOffer = new Offer();
+		fiestaOffer.setEngine(EngineType.GASOLINE);
+		fiestaOffer.setImageUrl("https://www.motopfohe.bg/files/news/archive/2017/08/blob-server2.jpg");
+		fiestaOffer.setMileage(80000);
+		fiestaOffer.setPrice(BigDecimal.valueOf(10000));
+		fiestaOffer.setYear(2019);
+		fiestaOffer.setDescription("Brought from Germany.");
+		fiestaOffer.setTransmission(TransmissionType.MANUAL);
+		fiestaOffer.setModel(model);
+		fiestaOffer.setCreated(Instant.now());
+		fiestaOffer.setUpdated(Instant.now());
+		
+		this.offerRepository.save(fiestaOffer);
+		
+	}
 
 	private Model initNC750S(Brand hondaBrand) {
 		Model nc750s = new Model();

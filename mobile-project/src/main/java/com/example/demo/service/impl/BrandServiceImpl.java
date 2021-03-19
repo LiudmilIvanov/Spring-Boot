@@ -42,10 +42,6 @@ public class BrandServiceImpl implements BrandService{
 		allModels.forEach(m -> {
 			Brand brand = m.getBrand();
 
-			//BrandViewModel brandViewModel = this.brandRepository.findByName(brand.getName());
-		/*	BrandViewModel brandViewModel = this.modelMapper.map(brand, BrandViewModel.class);
-			System.out.println();
-			result.add(brandViewModel);*/
 			Optional<BrandViewModel> brandViewModelOpt = findByName(result, brand.getName());
 				if (!brandViewModelOpt.isPresent()) {
 					BrandViewModel newBrandVIewModel = this.modelMapper.map(brand, BrandViewModel.class);
