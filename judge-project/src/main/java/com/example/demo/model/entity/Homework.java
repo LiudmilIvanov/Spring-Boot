@@ -9,14 +9,14 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "homework")
-public class HomeWork extends BaseEntity{
+public class Homework extends BaseEntity{
 
 	private LocalDateTime addedOn;
 	private String gitAddress;
 	private User author;
 	private Exercise exercise;
 	
-	public HomeWork() {
+	public Homework() {
 		
 	}
 
@@ -28,7 +28,7 @@ public class HomeWork extends BaseEntity{
 		this.addedOn = addedOn;
 	}
 	
-	@Column(name = "git_address")
+	@Column(name = "git_address", unique = true)
 	public String getGitAddress() {
 		return gitAddress;
 	}
