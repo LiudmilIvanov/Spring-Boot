@@ -40,27 +40,34 @@
                 </div>
                 <div class="row mt-2">
                     <div class="col-12">
-                        <form action="#" method=""
+                        <form action="/users/login" method="POST" th:object="${userLoginBindingModel}"
                               class="tm-login-form">
 							  <div class="text-center">
 							  
-							        <small class="text-danger col-12 text-center">Incorrect username or password</small>
+							  	<th:block th:if="${notFound}"> 
+							  	 <small class="text-danger col-12 text-center">Incorrect username or password</small>
 									<br/>
-									<small class="text-danger col-12 text-center">Username must be more than 2 characters</small>
+							  	</th:block>
+							  	
+							  	<th:block th:each="e : ${#fields.errors()}"> 
+							  	<small 	th:text="${e}"	class="text-danger col-12 text-center">Username must be more than 2 characters</small>
 									<br/>
-									<small class="text-danger col-12 text-center">Password must be more than 3 characters</small>
-									<br/>
+							  	</th:block>
+						
+							  	
+									
+									
 							 </div>
                              <hr/>
                             <div class="input-group">
                                 <label for="username" class="col-xl-4 col-lg-4 col-md-4 col-sm-5 col-form-label">Username</label>
-                                <input name="username" type="text"
+                                <input th:field="*{username}" th:errorclass="bg-danger"	name="username" type="text"
                                        class="form-control validate col-xl-9 col-lg-8 col-md-8 col-sm-7"
                                        id="username" placeholder="Username" required>
                             </div>
                             <div class="input-group mt-3">
                                 <label for="password" class="col-xl-4 col-lg-4 col-md-4 col-sm-5 col-form-label">Password</label>
-                                <input name="password" type="password" class="form-control validate"
+                                <input th:field="*{password}" th:errorclass="bg-danger"	name="password" type="password" class="form-control validate"
                                        id="password" placeholder="Password" required>
                             </div>
                             <div class="input-group mt-3">

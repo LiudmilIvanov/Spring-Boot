@@ -34,4 +34,15 @@ public class UserServiceImpl implements UserService{
 		userRepository.save(user);
 	}
 
+
+
+	@Override
+	public UserServiceModel findUserByUserNameAndPassword(String username, String password) {
+		
+		return userRepository
+				.findByUsernameAndPassword(username, password)
+				.map(user -> modelMapper.map(user, UserServiceModel.class))
+				.orElse(null);
+	}
+
 }

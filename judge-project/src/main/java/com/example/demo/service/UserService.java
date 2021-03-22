@@ -6,4 +6,6 @@ public interface UserService {
 
 	public void registerUser(UserServiceModel userServiceModel);
 
+	public UserServiceModel findUserByUserNameAndPassword(String username, String password);
+
 }

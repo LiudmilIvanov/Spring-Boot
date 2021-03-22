@@ -1,5 +1,6 @@
 package com.example.demo.web;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.modelmapper.ModelMapper;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.example.demo.model.binding.UserLoginBindingModel;
 import com.example.demo.model.binding.UserRegisterBindingModel;
 import com.example.demo.model.service.UserServiceModel;
 import com.example.demo.service.UserService;
@@ -33,8 +35,37 @@ public class UserController {
 
 
 	@GetMapping("/login")
-	public String login() {
+	public String login(Model model) {
+		if (!model.containsAttribute("userLoginBindingModel")) {
+			model.addAttribute("userLoginBindingModel", new UserLoginBindingModel());
+			model.addAttribute("notFound", false);
+		
+		}
 		return "login";
+	}
+
+	@PostMapping("/login")
+	public String loginConfirm(@Valid @ModelAttribute UserLoginBindingModel userLoginBindingModel, 
+			BindingResult bindingResult, RedirectAttributes redirectAttributes, HttpSession httpSession) {
+		
+		if (bindingResult.hasErrors()) {
+			redirectAttributes.addFlashAttribute("userLoginBindingModel", userLoginBindingModel);
+			redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.userLoginBindingModel", bindingResult);
+		
+			return "redirect:login";
+		}
+		UserServiceModel user = userService.findUserByUserNameAndPassword(userLoginBindingModel.getUsername(), 
+				userLoginBindingModel.getPassword());
+		
+		if (user == null) {
+			redirectAttributes.addFlashAttribute("userLoginBindingModel", userLoginBindingModel);
+			redirectAttributes.addFlashAttribute("notFound", true);
+			
+			return "redirect:login";
+		}
+		httpSession.setAttribute("user", user);
+		
+		return "redirect:/";
 	}
 	
 	
