@@ -11,6 +11,7 @@ import javax.persistence.Table;
 public class User extends BaseEntity{
 
 	private String username;
+	private String password;
 	private String firstName;
 	private String lastName;
 	private boolean isActive;
@@ -18,6 +19,14 @@ public class User extends BaseEntity{
 	
 	@ManyToMany
 	private List<UserRole> userRoles;
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
 
 	public String getUsername() {
 		return username;

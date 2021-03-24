@@ -8,17 +8,20 @@ import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import com.example.demo.model.entity.Brand;
 import com.example.demo.model.entity.Model;
 import com.example.demo.model.entity.Offer;
+import com.example.demo.model.entity.User;
 import com.example.demo.model.entity.enums.EngineType;
 import com.example.demo.model.entity.enums.ModelCategory;
 import com.example.demo.model.entity.enums.TransmissionType;
 import com.example.demo.repositories.BrandRepository;
 import com.example.demo.repositories.ModelRepository;
 import com.example.demo.repositories.OfferRepository;
+import com.example.demo.repositories.UserRepository;
 
 @Component
 public class DBInit implements CommandLineRunner{
@@ -26,13 +29,17 @@ public class DBInit implements CommandLineRunner{
 	private final ModelRepository modelRepository;
 	private final BrandRepository brandRepository;
 	private final OfferRepository offerRepository;
+	private final PasswordEncoder passwordEncoder;
+	private final UserRepository userRepository;
 	
 	@Autowired
 	public DBInit(ModelRepository modelRepository, BrandRepository brandRepository, 
-			OfferRepository offerRepository) {
+			OfferRepository offerRepository, PasswordEncoder passwordEncoder, UserRepository userRepository) {
 		this.modelRepository = modelRepository;
 		this.brandRepository = brandRepository;
 		this.offerRepository = offerRepository;
+		this.passwordEncoder = passwordEncoder;
+		this.userRepository = userRepository;
 	}
 
 	@Transactional
@@ -58,8 +65,22 @@ public class DBInit implements CommandLineRunner{
 		Model fiestaModel = initFiest(fordBrand);
 		createFiestaOffer(fiestaModel);
 		
-		
+		initAdmin();
 	}
+	
+	private void initAdmin() {
+		User admin = new User();
+		admin.setFirstName("Peter");
+		admin.setLastName("Dimitrov");
+		admin.setUsername("admin");
+		admin.setPassword(passwordEncoder.encode("topsecret"));
+		admin.setCreated(Instant.now());
+		admin.setUpdated(Instant.now());
+		
+		userRepository.save(admin);
+	
+	}
+	
 	private void createFiestaOffer(Model model) {
 		Offer fiestaOffer = new Offer();
 		fiestaOffer.setEngine(EngineType.GASOLINE);
