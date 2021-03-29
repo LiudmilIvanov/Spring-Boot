@@ -9,7 +9,8 @@ public class CurrentUser {
 
 	private static final String ANNONYMOUS = "annonymous";
 	private String name = "ANNONYMOUS";
-	private boolean isAnnonymous;
+	private boolean isAnnonymous = true;
+	
 	
 	public CurrentUser() {
 
@@ -25,6 +26,10 @@ public class CurrentUser {
 
 	public boolean isAnnonymous() {
 		return isAnnonymous;
+	}
+	
+	public boolean isLoggedIn() {
+		return !isAnnonymous;
 	}
 
 	public CurrentUser setAnnonymous(boolean isAnnonymous) {

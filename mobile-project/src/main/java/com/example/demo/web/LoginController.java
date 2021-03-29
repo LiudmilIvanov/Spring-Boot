@@ -26,7 +26,7 @@ public class LoginController {
 
 	@GetMapping("/users/login")
 	public String showLogin() {
-	
+
 		return "auth-login";
 	}
 	
@@ -38,6 +38,13 @@ public class LoginController {
 		} else {
 			return "redirect:/users/login";
 		}
+	}
+	
+	@PostMapping("/users/logout")
+	public String logout() {
+		userService.logoutCurrentUser();
+		
+		return "redirect:/";
 	}
 	
 }
