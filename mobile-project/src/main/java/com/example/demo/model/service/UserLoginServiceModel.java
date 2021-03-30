@@ -1,5 +1,8 @@
 package com.example.demo.model.service;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
 public class UserLoginServiceModel {
 
 	private String username;
@@ -9,6 +12,8 @@ public class UserLoginServiceModel {
 
 	}
 
+	@NotNull
+	@Size(min = 2)
 	public String getUsername() {
 		return username;
 	}
@@ -17,6 +22,8 @@ public class UserLoginServiceModel {
 		this.username = username;
 	}
 
+	@NotNull
+	@Size(min = 3)
 	public String getPassword() {
 		return password;
 	}
