@@ -2,6 +2,7 @@ package com.example.demo.model.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -19,7 +20,7 @@ public class UserRole {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 
-	@Enumerated
+	@Enumerated(EnumType.STRING)
 	private UserRoleEnum role;
 
 	public long getId() {

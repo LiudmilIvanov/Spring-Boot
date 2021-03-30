@@ -3,6 +3,7 @@ package com.example.demo.model.entity;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
@@ -17,7 +18,7 @@ public class User extends BaseEntity{
 	private boolean isActive;
 	private String imageUrl;
 	
-	@ManyToMany
+	@ManyToMany(fetch = FetchType.EAGER)
 	private List<UserRole> userRoles;
 
 	public String getPassword() {

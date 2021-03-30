@@ -15,13 +15,16 @@ import com.example.demo.model.entity.Brand;
 import com.example.demo.model.entity.Model;
 import com.example.demo.model.entity.Offer;
 import com.example.demo.model.entity.User;
+import com.example.demo.model.entity.UserRole;
 import com.example.demo.model.entity.enums.EngineType;
 import com.example.demo.model.entity.enums.ModelCategory;
 import com.example.demo.model.entity.enums.TransmissionType;
+import com.example.demo.model.entity.enums.UserRoleEnum;
 import com.example.demo.repositories.BrandRepository;
 import com.example.demo.repositories.ModelRepository;
 import com.example.demo.repositories.OfferRepository;
 import com.example.demo.repositories.UserRepository;
+import com.example.demo.repositories.UserRoleRepository;
 
 @Component
 public class DBInit implements CommandLineRunner{
@@ -31,21 +34,24 @@ public class DBInit implements CommandLineRunner{
 	private final OfferRepository offerRepository;
 	private final PasswordEncoder passwordEncoder;
 	private final UserRepository userRepository;
+	private final UserRoleRepository userRoleRepository;
 	
 	@Autowired
 	public DBInit(ModelRepository modelRepository, BrandRepository brandRepository, 
-			OfferRepository offerRepository, PasswordEncoder passwordEncoder, UserRepository userRepository) {
+			OfferRepository offerRepository, PasswordEncoder passwordEncoder, UserRepository userRepository, 
+			UserRoleRepository userRoleRepositor) {
 		this.modelRepository = modelRepository;
 		this.brandRepository = brandRepository;
 		this.offerRepository = offerRepository;
 		this.passwordEncoder = passwordEncoder;
 		this.userRepository = userRepository;
+		this.userRoleRepository = userRoleRepositor;
 	}
 
 	@Transactional
 	@Override
 	public void run(String... args) throws Exception {
-	/*	Brand fordBrand = new Brand();
+		Brand fordBrand = new Brand();
 		fordBrand.setName("Ford");
 		fordBrand.setCreated(Instant.now());
 		fordBrand.setUpdated(Instant.now());
@@ -65,19 +71,37 @@ public class DBInit implements CommandLineRunner{
 		Model fiestaModel = initFiest(fordBrand);
 		createFiestaOffer(fiestaModel);
 		
-		initAdmin();*/
+		initUsers();
 	}
 	
-	private void initAdmin() {
+	private void initUsers() {
+		UserRole adminRole = new UserRole(); 
+		adminRole.setRole(UserRoleEnum.ADMIN);
+		
+		UserRole userRole = new UserRole();
+		userRole.setRole(UserRoleEnum.USER);
+		
+		userRoleRepository.saveAll(List.of(adminRole, userRole));
+		System.out.println();
 		User admin = new User();
-		admin.setFirstName("Peter");
+		admin.setFirstName("Kiril");
 		admin.setLastName("Dimitrov");
 		admin.setUsername("admin");
 		admin.setPassword(passwordEncoder.encode("topsecret"));
 		admin.setCreated(Instant.now());
 		admin.setUpdated(Instant.now());
+		admin.setUserRoles(List.of(adminRole, userRole));
 		
-		userRepository.save(admin);
+		User user = new User();
+		user.setFirstName("Peter");
+		user.setLastName("Ivanov");
+		user.setUsername("pesho123");
+		user.setPassword(passwordEncoder.encode("topsecret"));
+		user.setCreated(Instant.now());
+		user.setUpdated(Instant.now());
+		user.setUserRoles(List.of(userRole));
+		
+		userRepository.saveAll(List.of(admin, user));
 	
 	}
 	
