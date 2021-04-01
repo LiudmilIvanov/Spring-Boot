@@ -8,6 +8,7 @@ import com.example.demo.model.entity.User;
 import com.example.demo.model.entity.enums.RoleName;
 import com.example.demo.model.service.UserServiceModel;
 import com.example.demo.repository.UserRepository;
+import com.example.demo.security.CurrentUser;
 
 @Service
 public class UserServiceImpl implements UserService{
@@ -15,13 +16,16 @@ public class UserServiceImpl implements UserService{
 	private final ModelMapper modelMapper;
 	private final UserRepository userRepository;
 	private final RoleService roleService;
+	private final CurrentUser currentUser;
 	
 	
 	@Autowired
-	public UserServiceImpl(ModelMapper modelMapper, UserRepository userRepository, RoleService roleService) {
+	public UserServiceImpl(ModelMapper modelMapper, UserRepository userRepository, RoleService roleService,
+			CurrentUser currentUser) {
 		this.modelMapper = modelMapper;
 		this.userRepository = userRepository;
 		this.roleService = roleService;
+		this.currentUser = currentUser;
 	}
 
 
@@ -43,6 +47,17 @@ public class UserServiceImpl implements UserService{
 				.findByUsernameAndPassword(username, password)
 				.map(user -> modelMapper.map(user, UserServiceModel.class))
 				.orElse(null);
+	}
+
+
+
+	@Override
+	public void login(UserServiceModel user) {
+		currentUser
+		.setId(user.getId())
+		.setUsername(user.getUsername())
+		.setRole(user.getRole().getName());
+		
 	}
 
 }

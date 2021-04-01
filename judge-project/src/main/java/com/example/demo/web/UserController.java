@@ -53,7 +53,7 @@ public class UserController {
 		if (bindingResult.hasErrors()) {
 			redirectAttributes.addFlashAttribute("userLoginBindingModel", userLoginBindingModel);
 			redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.userLoginBindingModel", bindingResult);
-		
+
 			return "redirect:login";
 		}
 		UserServiceModel user = userService.findUserByUserNameAndPassword(userLoginBindingModel.getUsername(), 
@@ -64,8 +64,11 @@ public class UserController {
 			redirectAttributes.addFlashAttribute("notFound", true);
 			
 			return "redirect:login";
-		}
-		httpSession.setAttribute("user", user);
+		} 
+	
+		//httpSession.setAttribute("user", user);
+	
+		userService.login(user);
 		
 		return "redirect:/";
 	}

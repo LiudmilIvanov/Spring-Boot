@@ -42,10 +42,11 @@ public class LoginController {
 	@PostMapping("/users/login")
 	public String login(@Valid @ModelAttribute UserLoginServiceModel userModel, BindingResult bindingResult,
 			RedirectAttributes redirectAttribute) {
+	
 		if (bindingResult.hasErrors()) {
 			redirectAttribute.addFlashAttribute("userModel", userModel);
-			redirectAttribute.addFlashAttribute(" org.springframework.validation.BindingResult.userModel", bindingResult);
-			
+			redirectAttribute.addFlashAttribute("org.springframework.validation.BindingResult.userModel", bindingResult);
+
 			return "redirect:/users/login";
 		}
 		

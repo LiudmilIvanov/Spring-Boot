@@ -8,4 +8,7 @@ public interface UserService {
 
 	public UserServiceModel findUserByUserNameAndPassword(String username, String password);
 
+	public void login(UserServiceModel user);
+
+
 }
