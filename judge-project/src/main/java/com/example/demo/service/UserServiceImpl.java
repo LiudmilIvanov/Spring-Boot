@@ -33,7 +33,7 @@ public class UserServiceImpl implements UserService{
 	@Override
 	public void registerUser(UserServiceModel userServiceModel) {
 		User user = modelMapper.map(userServiceModel, User.class);
-		user.setRole(roleService.findRole(RoleName.USER));
+		user.setRole(roleService.findRole(RoleName.ADMIN));
 
 		userRepository.save(user);
 	}
@@ -58,6 +58,16 @@ public class UserServiceImpl implements UserService{
 		.setUsername(user.getUsername())
 		.setRole(user.getRole().getName());
 		
+	}
+
+
+
+	@Override
+	public void logout() {
+		currentUser
+			.setId(null)
+			.setRole(null)
+			.setUsername(null);
 	}
 
 }

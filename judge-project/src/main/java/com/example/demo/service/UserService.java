@@ -10,5 +10,7 @@ public interface UserService {
 
 	public void login(UserServiceModel user);
 
+	public void logout();
+
 
 }
