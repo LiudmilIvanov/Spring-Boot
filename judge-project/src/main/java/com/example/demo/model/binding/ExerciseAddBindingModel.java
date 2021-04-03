@@ -46,6 +46,10 @@ public class ExerciseAddBindingModel {
 	public void setDueDate(LocalDateTime dueDate) {
 		this.dueDate = dueDate;
 	}
+
+	public ExerciseAddBindingModel() {
+
+	}
 	
 	
 	

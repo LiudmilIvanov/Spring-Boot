@@ -1,51 +1,80 @@
-package com.example.demo.model.entity;
+package com.example.demo.model.service;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import org.springframework.format.annotation.DateTimeFormat;
 
-@Entity
-@Table(name = "exercises")
-public class Exercise extends BaseEntity{
+public class ExerciseServiceModel {
 
+	private Long id;
 	private String name;
+
 	private LocalDateTime startedOn;
 	private LocalDateTime dueDate;
 	
-	public Exercise() {
-
+	
+	
+	
+	public Long getId() {
+		return id;
 	}
-	@Column(name = "name", nullable = false)
+
+
+
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+
+
+
 	public String getName() {
 		return name;
 	}
 
+
+
+
 	public void setName(String name) {
 		this.name = name;
 	}
-	@Column(name = "started_on")
+
+
+
+
 	public LocalDateTime getStartedOn() {
 		return startedOn;
 	}
 
+
+
+
 	public void setStartedOn(LocalDateTime startedOn) {
 		this.startedOn = startedOn;
 	}
-	@Column(name = "due_date")
+
+
+
+
 	public LocalDateTime getDueDate() {
 		return dueDate;
 	}
+
+
+
 
 	public void setDueDate(LocalDateTime dueDate) {
 		this.dueDate = dueDate;
 	}
 
-	
-	
 
+
+
+	public ExerciseServiceModel() {
+
+	}
 	
 	
 }
