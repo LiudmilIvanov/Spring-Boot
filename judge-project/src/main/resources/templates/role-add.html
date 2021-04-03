@@ -1,6 +1,8 @@
 <!DOCTYPE html>
-<html lang="en" >
-
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+	<th:block th:include="~{fragment/head}">
+	
+	</th:block>
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -19,6 +21,9 @@
 <div class="container">
     <div class="row rounded">
         <div class="col-12">
+         	<th:block th:include="~{fragment/nav}">
+	
+	
              <nav class="navbar navbar-expand-xl navbar-light bg-light rounded" >
         <a class="navbar-brand" href="/">
             <h1 class="tm-site-title mb-0">Judge v2</h1>
@@ -70,7 +75,7 @@
             </ul>
         </div>
     </nav>
-
+</th:block>
         </div>
     </div>
     <!-- row -->
@@ -84,22 +89,21 @@
                 </div>
                 <div class="row mt-4 tm-edit-product-row">
                     <div class="col-xl-7 col-lg-7 col-md-12">
-                        <form action="#" method=""
+                        <form action="/roles/add" method="POST"
                               class="tm-edit-product-form" >
                             <div class="input-group mb-3">
                                 <label for="username" class="col-xl-4 col-lg-4 col-md-4 col-sm-5 col-form-label">Users</label>
                                 <select class="custom-select col-xl-9 col-lg-8 col-md-8 col-sm-7" id="username" name="username">
                                     <option value="" selected>Select user</option>
                                     
-                                        <option>Pesho</option>
-										<option>Gosho</option>
-										<option>Veso</option>
+                                     
+										<option th:each="n : ${names}" th:text="${n}" th:value="${n}" >Veso</option>
 										
                                     
                                 </select>
                             </div>
                             <div class="input-group mb-3">
-                                <label class="col-xl-4 col-lg-4 col-md-4 col-sm-5 col-form-label">Users</label>
+                                <label class="col-xl-4 col-lg-4 col-md-4 col-sm-5 col-form-label">Roles</label>
                                 <div>
                                     <input type="radio" id="user" name="role" value="user">
                                     <label for="user">User</label><br/>
@@ -123,6 +127,7 @@
             </div>
         </div>
     </div>
+    <th:block th:include="~{fragment/footer}">
         <footer class="row">
         <div class="col-12 container-fluid text-right font-weight-light">
             <p class="d-inline-block tm-bg-black text-white py-2 px-4">
@@ -130,6 +135,7 @@
             </p>
         </div>
     </footer>
+	</th:block>
 </div>
 
 </body>

@@ -1,5 +1,8 @@
 package com.example.demo.service;
 
+import java.util.List;
+import java.util.Optional;
+
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -68,6 +71,27 @@ public class UserServiceImpl implements UserService{
 			.setId(null)
 			.setRole(null)
 			.setUsername(null);
+	}
+
+
+
+	@Override
+	public List<String> findAllUsernames() {
+
+		return userRepository.findAllUsernames();
+	}
+
+
+
+	@Override
+	public void changeRole(String username, RoleName roleName) {
+		User user = userRepository.findByUsername(username).orElse(null);
+		
+			if (user.getRole().getName() != roleName) {
+				user.setRole(roleService.findRole(roleName));
+					
+				userRepository.save(user);
+		}
 	}
 
 }
