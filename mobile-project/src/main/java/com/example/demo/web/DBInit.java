@@ -53,16 +53,16 @@ public class DBInit implements CommandLineRunner{
 	public void run(String... args) throws Exception {
 		Brand fordBrand = new Brand();
 		fordBrand.setName("Ford");
-		fordBrand.setCreated(Instant.now());
-		fordBrand.setUpdated(Instant.now());
+	//	fordBrand.setCreated(Instant.now());
+	//	fordBrand.setUpdated(Instant.now());
 		
 		Model fiesta = initFiest(fordBrand);
 		Model escort = initEscort(fordBrand);
 		
 		Brand hondaBrand = new Brand();
 		hondaBrand.setName("Honda");
-		hondaBrand.setCreated(Instant.now());
-		hondaBrand.setUpdated(Instant.now());
+	//	hondaBrand.setCreated(Instant.now());
+	//	hondaBrand.setUpdated(Instant.now());
 		
 		Model honda = initNC750S(hondaBrand);
 		
@@ -88,8 +88,8 @@ public class DBInit implements CommandLineRunner{
 		admin.setLastName("Dimitrov");
 		admin.setUsername("admin");
 		admin.setPassword(passwordEncoder.encode("topsecret"));
-		admin.setCreated(Instant.now());
-		admin.setUpdated(Instant.now());
+		//admin.setCreated(Instant.now());
+		//admin.setUpdated(Instant.now());
 		admin.setUserRoles(List.of(adminRole, userRole));
 		
 		User user = new User();
@@ -97,8 +97,8 @@ public class DBInit implements CommandLineRunner{
 		user.setLastName("Ivanov");
 		user.setUsername("pesho123");
 		user.setPassword(passwordEncoder.encode("topsecret"));
-		user.setCreated(Instant.now());
-		user.setUpdated(Instant.now());
+	//	user.setCreated(Instant.now());
+		/*	user.setUpdated(Instant.now());*/
 		user.setUserRoles(List.of(userRole));
 		
 		userRepository.saveAll(List.of(admin, user));
@@ -115,8 +115,8 @@ public class DBInit implements CommandLineRunner{
 		fiestaOffer.setDescription("Brought from Germany.");
 		fiestaOffer.setTransmission(TransmissionType.MANUAL);
 		fiestaOffer.setModel(model);
-		fiestaOffer.setCreated(Instant.now());
-		fiestaOffer.setUpdated(Instant.now());
+		/*	fiestaOffer.setCreated(Instant.now());
+		fiestaOffer.setUpdated(Instant.now());*/
 		
 		this.offerRepository.save(fiestaOffer);
 		
@@ -129,8 +129,8 @@ public class DBInit implements CommandLineRunner{
 		nc750s.setImageUrl("https://www.bultraco-sofia.bg/sites/default/files/color_01_15.jpg");
 		nc750s.setStartYear(2014);
 		nc750s.setBrand(hondaBrand);
-		nc750s.setCreated(Instant.now());
-		nc750s.setUpdated(Instant.now());
+		/*	nc750s.setCreated(Instant.now());
+		nc750s.setUpdated(Instant.now());*/
 		
 		return this.modelRepository.save(nc750s);
 	}
@@ -143,8 +143,8 @@ public class DBInit implements CommandLineRunner{
 		escort.setStartYear(1968);
 		escort.setEndYear(2002);
 		escort.setBrand(fordBrand);
-		escort.setCreated(Instant.now());
-		escort.setUpdated(Instant.now());
+		/*	escort.setCreated(Instant.now());
+		escort.setUpdated(Instant.now());*/
 		
 		return this.modelRepository.save(escort);
 	}
@@ -156,8 +156,8 @@ public class DBInit implements CommandLineRunner{
 		fiesta.setImageUrl("https://www.motopfohe.bg/files/news/archive/2017/08/blob-server2.jpg");
 		fiesta.setStartYear(1976);
 		fiesta.setBrand(fordBrand);
-		fiesta.setCreated(Instant.now());
-		fiesta.setUpdated(Instant.now());
+	/*	fiesta.setCreated(Instant.now());
+		fiesta.setUpdated(Instant.now());*/
 		
 		return this.modelRepository.save(fiesta);
 	}

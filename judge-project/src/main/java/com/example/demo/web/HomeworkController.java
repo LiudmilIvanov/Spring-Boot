@@ -58,6 +58,8 @@ public class HomeworkController {
 		if (isLate) {
 			redirectAttribute.addFlashAttribute("homeworkAddBindingModel", homeworkAddBindingModel);
 			redirectAttribute.addFlashAttribute("isLate", true);
+			
+			return "redirect:add";
 		}
 		
 		homeworkService.addHomework(homeworkAddBindingModel.getExercise(), homeworkAddBindingModel.getGitAddress());
