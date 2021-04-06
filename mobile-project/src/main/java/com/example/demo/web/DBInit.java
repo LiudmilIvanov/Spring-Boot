@@ -51,7 +51,7 @@ public class DBInit implements CommandLineRunner{
 	@Transactional
 	@Override
 	public void run(String... args) throws Exception {
-		Brand fordBrand = new Brand();
+	/*	Brand fordBrand = new Brand();
 		fordBrand.setName("Ford");
 	//	fordBrand.setCreated(Instant.now());
 	//	fordBrand.setUpdated(Instant.now());
@@ -71,7 +71,7 @@ public class DBInit implements CommandLineRunner{
 		Model fiestaModel = initFiest(fordBrand);
 		createFiestaOffer(fiestaModel);
 		
-		initUsers();
+		initUsers();*/
 	}
 	
 	private void initUsers() {

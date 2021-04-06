@@ -10,6 +10,7 @@ import com.example.demo.model.entity.enums.ModelCategory;
 
 public class ModelViewModel {
 
+	private long id; 
 	private String name;
 	private ModelCategory category;
 	private String imageUrl;
@@ -48,6 +49,12 @@ public class ModelViewModel {
 	}
 	public void setEndYear(Integer endYear) {
 		this.endYear = endYear;
+	}
+	public long getId() {
+		return id;
+	}
+	public void setId(long id) {
+		this.id = id;
 	}
 
 	
