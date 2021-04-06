@@ -1,5 +1,8 @@
 package com.example.demo.service;
 
+import java.time.LocalDateTime;
+import java.util.List;
+
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -31,6 +34,32 @@ public class ExerciseServiceImpl implements ExerciseService{
 		
 		exerciseRepository.save(exercise);
 		
+	}
+
+
+
+	@Override
+	public List<String> findAllExNames() {
+		return exerciseRepository.findAllExerciseNames();
+	}
+
+
+
+	@Override
+	public boolean checkIfLate(String exercise) {
+		Exercise exerciseEntity = exerciseRepository.findByName(exercise)
+			.orElse(null); 
+		
+		return exerciseEntity.getDueDate().isBefore(LocalDateTime.now());
+	}
+
+
+
+	@Override
+	public Exercise findByName(String name) {
+		
+		return exerciseRepository
+				.findByName(name).orElse(null);
 	}
 
 }

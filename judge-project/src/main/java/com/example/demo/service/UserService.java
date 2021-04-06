@@ -2,6 +2,7 @@ package com.example.demo.service;
 
 import java.util.List;
 
+import com.example.demo.model.entity.User;
 import com.example.demo.model.entity.enums.RoleName;
 import com.example.demo.model.service.UserServiceModel;
 
@@ -18,6 +19,8 @@ public interface UserService {
 	public List<String> findAllUsernames();
 
 	public void changeRole(String username, RoleName roleName);
+
+	public User findById(Long id);
 
 
 }
