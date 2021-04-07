@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
      <meta charset="UTF-8">
@@ -88,7 +88,14 @@
             </ul>
             <div class="card-body">
                 <a class="card-link" href="/">Update</a>
-                <a class="card-link" href="/">Delete</a>
+                
+               <form th:action="@{/offers/offer/{id}/(id=${id})}"
+                      th:method="delete">
+                    <input
+                        class="card-link"
+                        type="submit"
+                        value="Delete">
+                </form>
             </div>
         </div>
         <div class="offer card col-sm-2 col-md-3  col-lg-4 m-1 p-0">

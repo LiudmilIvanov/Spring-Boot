@@ -41,7 +41,7 @@ public class Offer extends BaseEntity{
 	@ManyToOne
 	private Model model;
 	
-	/*@ManyToOne
+	@ManyToOne
 	private User user;
 	
 	public User getUser() {
@@ -50,7 +50,7 @@ public class Offer extends BaseEntity{
 
 	public void setUser(User user) {
 		this.user = user;
-	}*/
+	}
 
 	public EngineType getEngine() {
 		return engine;

@@ -22,12 +22,13 @@ public class OfferServiceModel {
 
 	@NotNull
 	private EngineType engine;
-	@NotNull
+	
 	private String imageUrl;
 	@NotNull
 	@Positive
 	private Integer mileage;
 	
+	@NotNull
 	@DecimalMin("100")
 	private BigDecimal price;
 	
@@ -42,7 +43,7 @@ public class OfferServiceModel {
 	private TransmissionType transmission;
 	
 	@NotNull
-	private Integer modelId;
+	private Long modelId;
 
 	public String getDescription() {
 		return description;
@@ -74,12 +75,6 @@ public class OfferServiceModel {
 	public void setYear(Integer year) {
 		this.year = year;
 	}
-	public Integer getModelId() {
-		return modelId;
-	}
-	public void setModelId(Integer modelId) {
-		this.modelId = modelId;
-	}
 	public EngineType getEngine() {
 		return engine;
 	}
@@ -91,6 +86,12 @@ public class OfferServiceModel {
 	}
 	public void setTransmission(TransmissionType transmission) {
 		this.transmission = transmission;
+	}
+	public Long getModelId() {
+		return modelId;
+	}
+	public void setModelId(Long modelId) {
+		this.modelId = modelId;
 	}
 	
 	
