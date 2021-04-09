@@ -18,11 +18,14 @@ public class ProductServiceImpl implements ProductService{
 
 	private final ProductRepository productRepository;
 	private final ModelMapper modelMapper;
+	private final CategoryRepository categoryRepository;
 	
 	@Autowired
-	public ProductServiceImpl(ProductRepository productRepository, ModelMapper modelMapper) {
+	public ProductServiceImpl(ProductRepository productRepository, ModelMapper modelMapper
+			,CategoryRepository categoryRepository) {
 		this.productRepository = productRepository;
 		this.modelMapper = modelMapper;
+		this.categoryRepository = categoryRepository;
 	}
 
 
@@ -31,10 +34,8 @@ public class ProductServiceImpl implements ProductService{
 	@Transactional
 	public void save(ProductAddServiceModel productServiceModel) {
 		Product product = modelMapper.map(productServiceModel, Product.class);
-		// TODO crate method that fetch category from the DB and set it to the product
-		
-		
-		
+		product.setCategory(categoryRepository.findByName(productServiceModel.getCategory()));
+
 		productRepository.saveAndFlush(product);
 	}
 
