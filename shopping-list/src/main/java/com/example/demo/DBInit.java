@@ -1,5 +1,6 @@
 package com.example.demo;
 
+import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,22 +34,14 @@ public class DBInit implements CommandLineRunner{
 
 	public void initCategories() {
 		if (!categoryService.ifExist()) {
-			Category food = new Category();
-			food.setName(CategoryTypeEnum.FOOD);
-			
-			Category drink = new Category();
-			drink.setName(CategoryTypeEnum.DRINK);
-			
-			Category household = new Category();
-			household.setName(CategoryTypeEnum.HOUSEHOLD);
-			
-			Category other = new Category();
-			other.setName(CategoryTypeEnum.OTHER);
-			
-			categoryRepository.saveAll(List.of(food, drink, household, other));
-			
+			Arrays.stream(CategoryTypeEnum.values())
+				.forEach(categoryName -> {
+					Category category = new Category(categoryName);
+					
+					categoryRepository.save(category);
+					
+				});
 		}
-		
 	}
 
 }

@@ -20,7 +20,7 @@ public class Product extends BaseEntity{
 	@Length(min = 3, max = 20)
 	private String name;
 	
-	@Column
+	@Column(columnDefinition = "TEXT")
 	@Length(min = 5)
 	private String description;
 

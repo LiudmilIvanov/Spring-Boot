@@ -46,7 +46,6 @@ public class ProductController {
 			redirectAttribute.addFlashAttribute("productAddBindingModel", productAddBindingModel);
 			redirectAttribute.addFlashAttribute("org.springframework.validation.BindingResult.productAddBindingModel", bindingResult);
 			
-			System.out.println();
 			
 			return "redirect:/product/add";
 			
@@ -54,7 +53,6 @@ public class ProductController {
 		
 		productService.save(modelMapper.map(productAddBindingModel, ProductAddServiceModel.class));
 		
-		System.out.println();
 		return "redirect:/home";
 	}
 	

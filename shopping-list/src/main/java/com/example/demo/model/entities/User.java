@@ -16,10 +16,10 @@ public class User extends BaseEntity{
 	@Size(min = 3, max = 20)
 	private String username;
 	
-	@Column
+	@Column(nullable = false)
 	private String password;
 
-	@Column(nullable = false)
+	@Column(nullable = false, unique = true)
 	@Email
 	private String email;
 
