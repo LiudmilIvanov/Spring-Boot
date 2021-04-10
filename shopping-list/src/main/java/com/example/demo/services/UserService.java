@@ -13,4 +13,6 @@ public interface UserService {
 	public void login(UserLoginBindingModel userModel);
 	
 	public boolean isLogged();
+
+	public void logout();
 }

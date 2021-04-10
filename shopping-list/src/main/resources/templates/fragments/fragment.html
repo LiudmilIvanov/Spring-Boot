@@ -21,7 +21,7 @@
             <div class="collapse navbar-collapse d-flex justify-content-end" id="navbarNav">
                 <ul class="navbar-nav row">
                   <li th:unless="${@currentUser.isAnonymous()}" class="nav-item col-md-4">
-                        <a class="nav-link text-white active h5" href="/">Logout</a>
+                        <a class="nav-link text-white active h5" href="/user/logout">Logout</a>
                     </li>
                  <th:block th:if="${@currentUser.isAnonymous()}"> 
                     <li class="nav-item col-md-4">

@@ -1,5 +1,9 @@
 package com.example.demo.services.impl;
 
+import java.math.BigDecimal;
+import java.util.List;
+import java.util.stream.Collectors;
+
 import javax.transaction.Transactional;
 
 import org.modelmapper.ModelMapper;
@@ -8,7 +12,9 @@ import org.springframework.stereotype.Service;
 
 import com.example.demo.model.entities.Category;
 import com.example.demo.model.entities.Product;
+import com.example.demo.model.enums.CategoryTypeEnum;
 import com.example.demo.model.services.ProductAddServiceModel;
+import com.example.demo.model.view.ProductViewModel;
 import com.example.demo.repositories.CategoryRepository;
 import com.example.demo.repositories.ProductRepository;
 import com.example.demo.services.ProductService;
@@ -37,6 +43,23 @@ public class ProductServiceImpl implements ProductService{
 		product.setCategory(categoryRepository.findByName(productServiceModel.getCategory()));
 
 		productRepository.saveAndFlush(product);
+	}
+
+
+
+	@Override
+	public BigDecimal getTotalSum() {
+		return productRepository.findTotalProductsSum();
+	}
+
+
+
+	@Override
+	public List<ProductViewModel> findAllProductsByCategoryName(CategoryTypeEnum categoryName) {
+		return productRepository.findAllByCategory_Name(categoryName)
+				.stream()
+				.map(p -> modelMapper.map(p, ProductViewModel.class))
+				.collect(Collectors.toList());
 	}
 
 }

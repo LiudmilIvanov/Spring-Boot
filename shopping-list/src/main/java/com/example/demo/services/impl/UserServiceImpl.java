@@ -80,4 +80,15 @@ public class UserServiceImpl implements UserService{
 		return currentUser.getUsername() != null;
 	}
 
+
+
+
+
+	@Override
+	public void logout() {
+		currentUser.setUsername(null);
+		currentUser.setRole(null);
+		
+	}
+
 }
