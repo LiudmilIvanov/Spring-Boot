@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
+<head th:replace="fragments/fragment :: head">
 	<meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Shopping list App</title>
@@ -10,7 +10,7 @@
 </head>
 <body>
 <header>
-    <nav class="navbar navbar-expand-lg bg-nav rounded">
+    <nav th:replace="fragments/fragment :: navigation" class="navbar navbar-expand-lg bg-nav rounded">
 			<a class="nav-link text-white active h5" href="/">Shopping List App</a>
 			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
                     aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -32,7 +32,7 @@
     <h1 class="text-center mt-2"><span class="badge badge-pill badge-dark">Login</span></h1>
     <hr class="hr-3 w-25 bg-white"/>
     <form class="mx-auto w-25 bg-blur" action="/user/login" method="post" th:object="${userLoginBindingModel}">    
-        <small th:if="${#fields.hasErrors('username')}" class="text-danger">Error message</small>
+        <small th:if="${notFound}" class="text-danger">Invalid user!</small>
         <br/>  
         <small th:if="${#fields.hasErrors('username')}" th:errors="*{username}"	class="text-danger">Incorrect username or password!</small>
         <div class="form-group">
@@ -53,7 +53,7 @@
     </form>
 </main>
 
-<footer class="footer bg-transparent  py-2">
+<footer th:replace="fragments/fragment ::footer" class="footer bg-transparent  py-2">
     <div class="container-fluid text-center">
 		<div class="footer-background h5 text-white">
            &copy; Spring team 2020. All rights reserved.

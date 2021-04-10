@@ -36,7 +36,7 @@ public class UserController {
 	public String login(Model model) {
 		if (!model.containsAttribute("userLoginBindingModel")) {
 			model.addAttribute("userLoginBindingModel", new UserLoginBindingModel());
-			
+			model.addAttribute("notFound", false);
 		}
 		
 		return "login";
@@ -57,10 +57,13 @@ public class UserController {
 			userService.login(userLoginBindingModel);
 
 		return "redirect:/home";
+		} else {
+			redirectAttribute.addFlashAttribute("userLoginBindingModel", userLoginBindingModel);
+			redirectAttribute.addFlashAttribute("notFound", true);
 		}
 		
 		
-		return "redirect:/home";
+		return "redirect:/user/login";
 	}
 	
 	
