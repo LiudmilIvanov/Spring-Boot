@@ -14,4 +14,8 @@ public interface ProductService {
 	BigDecimal getTotalSum();
 	
 	List<ProductViewModel> findAllProductsByCategoryName(CategoryTypeEnum categoryName);
+
+	public void buyById(Long id);
+
+	public void buyAll();
 }

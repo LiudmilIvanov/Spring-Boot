@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -16,22 +17,29 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.example.demo.model.dtos.ProductAddBindingModel;
 import com.example.demo.model.services.ProductAddServiceModel;
 import com.example.demo.services.ProductService;
+import com.example.demo.services.UserService;
 
 @Controller
 @RequestMapping("/product")
 public class ProductController {
 
+	private final UserService userService;
 	private final ProductService productService;
 	private final ModelMapper modelMapper;
 	
 	@Autowired
-	public ProductController(ProductService productService, ModelMapper modelMapper) {
+	public ProductController(ProductService productService, ModelMapper modelMapper, UserService userService) {
+		this.userService = userService;
 		this.productService = productService;
 		this.modelMapper = modelMapper;
 	}
 
 	@GetMapping("/add")
 	public String addProduct(Model model) {
+		if (!userService.isLogged()) {
+			return "redirect:/user/login";
+		}
+		
 		if (!model.containsAttribute("productAddBindingModel")) {
 			model.addAttribute("productAddBindingModel", new ProductAddBindingModel());
 			
@@ -56,4 +64,38 @@ public class ProductController {
 		return "redirect:/";
 	}
 	
+	@GetMapping("/buy/{id}")
+	public String buyById(@PathVariable Long id) {
+		productService.buyById(id);
+		
+		return "redirect:/";
+	}
+	
+	@GetMapping("/buy/all")
+	public String buyAll() {
+		productService.buyAll();
+		
+		return "redirect:/";
+		
+	}
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -30,7 +30,9 @@ public class HomeController {
 		if (userService.isLogged()) {
 			model.addAttribute("totalSum", productService.getTotalSum());
 			model.addAttribute("drinks", productService.findAllProductsByCategoryName(CategoryTypeEnum.DRINK));
-			
+			model.addAttribute("foods", productService.findAllProductsByCategoryName(CategoryTypeEnum.FOOD));
+			model.addAttribute("households", productService.findAllProductsByCategoryName(CategoryTypeEnum.HOUSEHOLD));
+			model.addAttribute("others", productService.findAllProductsByCategoryName(CategoryTypeEnum.OTHER));
 			
 			return "home";
 		} else {

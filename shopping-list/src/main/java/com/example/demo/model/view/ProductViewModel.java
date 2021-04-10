@@ -1,15 +1,17 @@
 package com.example.demo.model.view;
 
+import java.math.BigDecimal;
+
 public class ProductViewModel {
 
-	private String id;
+	private Long id;
 	private String name;
-	private String price;
+	private BigDecimal price;
 
-	public String getId() {
+	public Long getId() {
 		return id;
 	}
-	public void setId(String id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 	public String getName() {
@@ -18,12 +20,14 @@ public class ProductViewModel {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public String getPrice() {
+	public BigDecimal getPrice() {
 		return price;
 	}
-	public void setPrice(String price) {
+	public void setPrice(BigDecimal price) {
 		this.price = price;
 	}
+	
+	
 	
 	
 }
