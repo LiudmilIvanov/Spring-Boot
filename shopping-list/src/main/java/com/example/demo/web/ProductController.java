@@ -53,7 +53,7 @@ public class ProductController {
 		
 		productService.save(modelMapper.map(productAddBindingModel, ProductAddServiceModel.class));
 		
-		return "redirect:/home";
+		return "redirect:/";
 	}
 	
 }

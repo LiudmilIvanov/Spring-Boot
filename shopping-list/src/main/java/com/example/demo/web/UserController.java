@@ -56,7 +56,7 @@ public class UserController {
 		if (userService.authenticate(userLoginBindingModel.getUsername(), userLoginBindingModel.getPassword())) {
 			userService.login(userLoginBindingModel);
 
-		return "redirect:/home";
+		return "redirect:/";
 		} else {
 			redirectAttribute.addFlashAttribute("userLoginBindingModel", userLoginBindingModel);
 			redirectAttribute.addFlashAttribute("notFound", true);

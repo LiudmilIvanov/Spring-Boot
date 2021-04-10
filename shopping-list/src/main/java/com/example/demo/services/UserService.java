@@ -11,4 +11,6 @@ public interface UserService {
 	boolean authenticate(String name, String password);
 
 	public void login(UserLoginBindingModel userModel);
+	
+	public boolean isLogged();
 }

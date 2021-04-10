@@ -71,4 +71,13 @@ public class UserServiceImpl implements UserService{
 		currentUser.setRole(RoleTypeEnum.USER);
 	}
 
+
+
+
+
+	@Override
+	public boolean isLogged() {
+		return currentUser.getUsername() != null;
+	}
+
 }

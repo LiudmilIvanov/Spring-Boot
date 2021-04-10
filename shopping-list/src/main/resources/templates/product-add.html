@@ -64,10 +64,10 @@
             </div>
             <select class="browser-default custom-select"  id="category" name="category">
                 <option value="">Select category</option>
-				<option value="FOOD">Food</option>
-                <option value="DRINK">Drink</option>
-                <option value="HOUSEHOLD">Household</option>
-                <option value="OTHER">Other</option>  				
+				<option th:each="c : ${T(com.example.demo.model.enums.CategoryTypeEnum).values()}"
+					th:text="${c}"
+				 th:value="${c}">Food</option>
+                	
             </select>
             <small th:if="${#fields.hasErrors('category')}" th:errors="*{category}"	class="text-danger">Category error message</small>
         </div>
