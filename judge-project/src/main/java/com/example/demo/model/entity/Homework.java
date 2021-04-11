@@ -1,10 +1,13 @@
 package com.example.demo.model.entity;
 
 import java.time.LocalDateTime;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -15,10 +18,25 @@ public class Homework extends BaseEntity{
 	private String gitAddress;
 	private User author;
 	private Exercise exercise;
+	private Set<Comment> comments;
 	
 	public Homework() {
 		
 	}
+
+	
+	@OneToMany(mappedBy = "homework", fetch = FetchType.EAGER)
+	public Set<Comment> getComments() {
+		return comments;
+	}
+
+
+
+	public void setComments(Set<Comment> comments) {
+		this.comments = comments;
+	}
+
+
 
 	@Column(name = "added_on")
 	public LocalDateTime getAddedOn() {
