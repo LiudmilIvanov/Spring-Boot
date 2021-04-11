@@ -1,8 +1,12 @@
 package com.example.demo.model.entity;
 
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -14,11 +18,25 @@ public class User extends BaseEntity {
 	private String email;
 	private String git;
 	private Role role;
+	private Set<Homework> homework;
 
 	public User() {
 
 	}
 	
+	
+	@OneToMany(mappedBy = "author", fetch = FetchType.EAGER)
+	public Set<Homework> getHomework() {
+		return homework;
+	}
+
+
+	public void setHomework(Set<Homework> homework) {
+		this.homework = homework;
+	}
+
+
+
 	@Column(name = "username", unique = true, nullable = false)
 	public String getUsername() {
 		return username;

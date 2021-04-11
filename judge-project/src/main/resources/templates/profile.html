@@ -1,6 +1,7 @@
 <!DOCTYPE html>
-<html lang="en" >
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
+<th:block th:include="~{fragment/head}">
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -14,11 +15,14 @@
         <script src="/js/bootstrap.min.js"></script>
 
     </head>
-
+	
+	</th:block>
 <body>
 <div class="container">
     <div class="row rounded">
         <div class="col-12">
+            <th:block th:include="~{fragment/nav}">
+       
                <nav class="navbar navbar-expand-xl navbar-light bg-light rounded" >
         <a class="navbar-brand" href="/">
             <h1 class="tm-site-title mb-0">Judge v2</h1>
@@ -70,6 +74,7 @@
             </ul>
         </div>
     </nav>
+         </th:block>
         </div>
     </div>
     <!-- row -->
@@ -83,28 +88,28 @@
                 </div>
                 <div class="row mt-4 tm-edit-product-row">
                     <div class="col-xl-7 col-lg-7 col-md-12">
-                        <form action="" class="tm-edit-product-form" >
+                        <form th:object=${user} action="" class="tm-edit-product-form" >
                             <div class="input-group mb-3">
                                 <label for="name" class="col-xl-4 col-lg-4 col-md-4 col-sm-5 col-form-label">
                                     Username
                                 </label>
-                                <input disabled id="name" name="name" type="text"
+                                <input th:field="*{username}" disabled id="name" name="name" type="text"
                                        class="form-control validate col-xl-9 col-lg-8 col-md-8 col-sm-7">
                             </div>
                             <div class="input-group mb-3">
                                 <label for="homeworks" class="col-xl-4 col-lg-4 col-md-4 col-sm-5 mb-2">All sent homeworks</label>
-                                <textarea disabled id="homeworks" class="form-control validate col-xl-9 col-lg-8 col-md-8 col-sm-7" rows="3" ></textarea>
+                                <textarea th:field="*{homeworkSet}" disabled id="homeworks" class="form-control validate col-xl-9 col-lg-8 col-md-8 col-sm-7" rows="3" ></textarea>
                             </div>
                             <div class="input-group mb-3">
                                 <label for="email" class="col-xl-4 col-lg-4 col-md-4 col-sm-5 col-form-label">Email
                                 </label>
-                                <input disabled id="email"   name="email" type="text" class="form-control validate col-xl-9 col-lg-8 col-md-8 col-sm-7"
+                                <input th:field="*{email}" disabled id="email"   name="email" type="text" class="form-control validate col-xl-9 col-lg-8 col-md-8 col-sm-7"
                                        data-large-mode="true">
                             </div>
                             <div class="input-group mb-3">
                                 <label for="git" class="col-xl-4 col-lg-4 col-md-4 col-sm-5 col-form-label">Github Address
                                 </label>
-                                <input disabled  id="git" name="git" type="text" class="form-control validate col-xl-9 col-lg-8 col-md-7 col-sm-7">
+                                <input th:field="*{git}" disabled  id="git" name="git" type="text" class="form-control validate col-xl-9 col-lg-8 col-md-7 col-sm-7">
                             </div>
                         </form>
                     </div>
@@ -115,7 +120,7 @@
             </div>
         </div>
     </div>
-
+	 <th:block th:include="~{fragment/footer}">
        <footer class="row">
         <div class="col-12 container-fluid text-right font-weight-light">
             <p class="d-inline-block tm-bg-black text-white py-2 px-4">
@@ -123,6 +128,7 @@
             </p>
         </div>
     </footer>
+   </th:block>
 </div>
 
 </body>

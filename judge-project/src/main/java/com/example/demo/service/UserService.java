@@ -5,6 +5,7 @@ import java.util.List;
 import com.example.demo.model.entity.User;
 import com.example.demo.model.entity.enums.RoleName;
 import com.example.demo.model.service.UserServiceModel;
+import com.example.demo.model.view.UserProfileViewModel;
 
 public interface UserService {
 
@@ -21,6 +22,8 @@ public interface UserService {
 	public void changeRole(String username, RoleName roleName);
 
 	public User findById(Long id);
+
+	public UserProfileViewModel findProfileById(Long id);
 
 
 }

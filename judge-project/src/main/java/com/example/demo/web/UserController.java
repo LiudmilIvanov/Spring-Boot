@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -62,7 +63,7 @@ public class UserController {
 		if (user == null) {
 			redirectAttributes.addFlashAttribute("userLoginBindingModel", userLoginBindingModel);
 			redirectAttributes.addFlashAttribute("notFound", true);
-			
+
 			return "redirect:login";
 		} 
 	
@@ -108,5 +109,16 @@ public class UserController {
 		return "redirect:/";
 	}
 	
+	@GetMapping("/profile/{id}")
+	public String profile(@PathVariable Long id, Model model) {
+		model.addAttribute("user", userService.findProfileById(id));
+		
+		return "profile";
+	}
 }
+
+
+
+
+
 

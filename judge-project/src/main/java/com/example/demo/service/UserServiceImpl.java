@@ -2,6 +2,7 @@ package com.example.demo.service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Service;
 import com.example.demo.model.entity.User;
 import com.example.demo.model.entity.enums.RoleName;
 import com.example.demo.model.service.UserServiceModel;
+import com.example.demo.model.view.UserProfileViewModel;
 import com.example.demo.repository.UserRepository;
 import com.example.demo.security.CurrentUser;
 
@@ -99,6 +101,25 @@ public class UserServiceImpl implements UserService{
 	@Override
 	public User findById(Long id) {
 		return userRepository.findById(id).orElse(null);
+	}
+
+
+
+	@Override
+	public UserProfileViewModel findProfileById(Long id) {
+		User user = userRepository.findById(id).orElse(null);
+
+		UserProfileViewModel userProfileViewModel = modelMapper.map(user, UserProfileViewModel.class);
+		
+		userProfileViewModel.setHomeworkSet(user
+				.getHomework()
+				.stream()
+				.map(homework -> homework.getExercise().getName())
+				.collect(Collectors.toSet())
+				);
+				
+
+		return userProfileViewModel;
 	}
 
 }
