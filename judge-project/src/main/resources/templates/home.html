@@ -131,9 +131,7 @@
                     <h2 class="tm-block-title">Active Exercises</h2>
                     <ol class="tm-list-group">
                         
-                            <li class="tm-list-group-item">Active exercise one</li>
-							 <li class="tm-list-group-item">Active exercise two</li>
-							  <li class="tm-list-group-item">Active exercise three</li>
+                            <li th:each="ex :${exercises}" th:text="${ex}" class="tm-list-group-item">Active exercise one</li>
                       
                     </ol>
                 </div>
@@ -159,11 +157,11 @@
     // Draw the chart and set the chart values
     function drawChart() {
 		//ToDo all grades count
-        let six = 1;
-        let five = 2;
-        let four = 4;
-        let three = 4;
-        let two = 5;
+        let six = [[${scoreMap[6]}]];
+        let five = [[${scoreMap[5]}]];
+        let four = [[${scoreMap[4]}]];
+        let three = [[${scoreMap[3]}]];
+        let two = [[${scoreMap[2]}]];
         let dataPie = google.visualization.arrayToDataTable([
             ['Task', 'Hours per Day'],
             ['Excellent', six],
@@ -191,7 +189,7 @@
 
     function drawAreaChart() {
         //ToDo averageGrades
-        let averageGrade = 4;
+        let averageGrade = [[${avg}]];
 
         let dataArea = google.visualization.arrayToDataTable([
             ['Grades', 'Legacy', 'Now'],
@@ -220,7 +218,7 @@
 
     function drawGauge() {
 		//ToDo total count of register users
-        let totalStudents = 20;
+        let totalStudents = [[${userCount}]];
         let dataGauge = google.visualization.arrayToDataTable([
             ['Label', 'Value'],
             ['All users', totalStudents]

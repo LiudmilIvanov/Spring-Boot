@@ -122,4 +122,11 @@ public class UserServiceImpl implements UserService{
 		return userProfileViewModel;
 	}
 
+
+
+	@Override
+	public Long findUserCount() {
+		return userRepository.count();
+	}
+
 }

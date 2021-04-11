@@ -19,6 +19,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.example.demo.model.binding.UserLoginBindingModel;
 import com.example.demo.model.binding.UserRegisterBindingModel;
 import com.example.demo.model.service.UserServiceModel;
+import com.example.demo.security.CurrentUser;
 import com.example.demo.service.UserService;
 
 @Controller
@@ -27,12 +28,14 @@ public class UserController {
 
 	private final UserService userService;
 	private final ModelMapper modelMapper;
+	private final CurrentUser currentUser;
 	
 	
 	@Autowired
-	public UserController(UserService userService, ModelMapper modelMapper) {
+	public UserController(UserService userService, ModelMapper modelMapper, CurrentUser currentUser) {
 		this.userService = userService;
 		this.modelMapper = modelMapper;
+		this.currentUser = currentUser;
 	}
 
 	
@@ -111,6 +114,11 @@ public class UserController {
 	
 	@GetMapping("/profile/{id}")
 	public String profile(@PathVariable Long id, Model model) {
+		if (currentUser.isAnonymous()) {
+			
+			return "redirect:/users/login";
+		}
+		
 		model.addAttribute("user", userService.findProfileById(id));
 		
 		return "profile";
