@@ -21,5 +21,30 @@ public class HomeController {
 	public String login() {
 		return "login";
 	}
+	
+	@GetMapping("/products")
+	public String products() {
+		return "products";
+	}
 
+	@GetMapping("/orders")
+	public String orders() {
+		return "orders";
+	}
+	
+	@GetMapping("/totalsum")
+	public String totalsum() {
+		return "totalsum";
+	}
+	
+	@GetMapping("/update")
+	public String update() {
+		return "updateInformation";
+	}
+	
+	@GetMapping("/profile")
+	public String profile() {
+		return "profile";
+	}
+	
 }
