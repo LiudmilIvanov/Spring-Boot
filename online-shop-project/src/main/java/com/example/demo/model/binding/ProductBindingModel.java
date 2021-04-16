@@ -1,41 +1,21 @@
-package com.example.demo.model.entities;
+package com.example.demo.model.binding;
 
 import java.math.BigDecimal;
 
 import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
 import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.Size;
 
-@Entity
-@Table(name = "products")
-public class ProductEntity extends BaseEntity {
+public class ProductBindingModel {
 
-	@Column(unique = true)
-	@Size(min = 3, max = 20)
 	private String name;
 	
-	@Column(nullable = false)
-	@DecimalMin(value = "0")
 	private BigDecimal price;
 	
-	@Column(nullable = false)
-	@Min(value = 0)
 	private long quantity;
 	
-	@Column(columnDefinition = "TEXT")
 	private String imageUrl;
-	
-
-	public String getImageUrl() {
-		return imageUrl;
-	}
-
-	public void setImageUrl(String imageUrl) {
-		this.imageUrl = imageUrl;
-	}
 
 	public String getName() {
 		return name;
@@ -60,6 +40,15 @@ public class ProductEntity extends BaseEntity {
 	public void setQuantity(long quantity) {
 		this.quantity = quantity;
 	}
+
+	public String getImageUrl() {
+		return imageUrl;
+	}
+
+	public void setImageUrl(String imageUrl) {
+		this.imageUrl = imageUrl;
+	}
+	
 	
 	
 }

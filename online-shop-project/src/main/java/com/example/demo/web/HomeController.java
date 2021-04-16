@@ -12,13 +12,12 @@ public class HomeController {
 	}
 
 
-	
 
 	
-	@GetMapping("/products")
+	/*@GetMapping("/products")
 	public String products() {
 		return "products";
-	}
+	}*/
 
 	@GetMapping("/orders")
 	public String orders() {
@@ -35,7 +34,7 @@ public class HomeController {
 		return "updateInformation";
 	}
 	
-	@GetMapping("/profile")
+	@GetMapping("/user/profile")
 	public String profile() {
 		return "profile";
 	}

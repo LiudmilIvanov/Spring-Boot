@@ -47,7 +47,8 @@
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <a class="dropdown-item" href="#">Coffee</a>
-                            <a class="dropdown-item" href="#">Tea</a>
+                            <a class="dropdown-item" href="/tea">Tea</a>
+                            <a sec:authorize="isAuthenticated()" class="dropdown-item" href="#">Add product</a>
 
                         </div>
                     </li>
@@ -59,6 +60,9 @@
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#">Contact</a>
+          </li>
+          <li sec:authorize="isAuthenticated()" class="nav-item">
+            <a class="nav-link" href="/user/profile">Profile</a>
           </li>
           <li sec:authorize="isAuthenticated()" class="nav-item">
             <a  class="nav-link" href="/logout">Sign out</a>
