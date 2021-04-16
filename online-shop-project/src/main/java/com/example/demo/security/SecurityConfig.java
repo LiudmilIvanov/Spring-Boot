@@ -50,11 +50,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 		http.csrf().disable();
 	}
 	
-	@Override
+/*	@Override
 	public void configure(WebSecurity web) throws Exception {
 		web
 			.ignoring()
-			.antMatchers("http://localhost:8080/**");
-	}
+			.antMatchers("/**");
+	}*/
 	
 }
