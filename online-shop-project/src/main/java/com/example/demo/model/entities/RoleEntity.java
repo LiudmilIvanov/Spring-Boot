@@ -3,6 +3,8 @@ package com.example.demo.model.entities;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.example.demo.model.enums.RoleTypeEnum;
@@ -13,7 +15,7 @@ public class RoleEntity extends BaseEntity{
 	
 	@Enumerated(EnumType.STRING)
 	private RoleTypeEnum name;
-
+	
 	public RoleTypeEnum getName() {
 		return name;
 	}
