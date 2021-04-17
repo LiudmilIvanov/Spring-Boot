@@ -117,9 +117,11 @@
 	                                   
                                       <select class="browser-default custom-select"  id="category" name="category">
                						 <option value="">Select category</option>
-											<option >Food</option>
-                								<option >Food</option>
-           								 </select>
+											<option th:each="c : ${T(com.example.demo.model.enums.CategoryTypeEnum).values()}" 
+											th:text="${c}"
+				 							th:value="${c}"
+											></option>
+           							 </select>
                                      <div class="form-group mb-5">
                                         <label for="exampleInputPassword1">image URL</label>
                                         <input th:field="*{imageUrl}" type="text" class="form-control" id="exampleInputPassword1">

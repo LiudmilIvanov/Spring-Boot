@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.Min;
@@ -28,6 +29,18 @@ public class ProductEntity extends BaseEntity {
 	@Column(columnDefinition = "TEXT")
 	private String imageUrl;
 	
+	@ManyToOne
+	private CategoryEntity category;
+	
+	
+
+	public CategoryEntity getCategory() {
+		return category;
+	}
+
+	public void setCategory(CategoryEntity category) {
+		this.category = category;
+	}
 
 	public String getImageUrl() {
 		return imageUrl;

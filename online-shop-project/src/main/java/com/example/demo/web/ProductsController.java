@@ -13,7 +13,7 @@ import com.example.demo.model.binding.ProductBindingModel;
 import com.example.demo.services.ProductService;
 
 @Controller
-@RequestMapping("")
+@RequestMapping("/products")
 public class ProductsController {
 
 	private final ProductService productService;
@@ -32,7 +32,7 @@ public class ProductsController {
 		return "product-tea";
 	}
 	
-	@GetMapping("/products/add")
+	@GetMapping("/add")
 	public String addProduct(Model model) {
 		if (!model.containsAttribute("productAddBindingModel")) {
 			model.addAttribute("productAddBindingModel", new ProductAddBindingModel());
@@ -44,8 +44,10 @@ public class ProductsController {
 		return "products-add";
 	}
 	
-	@PostMapping("/products/add")
+	@PostMapping("/add")
 	public String addProductConfirm(@ModelAttribute ProductAddBindingModel productAddBindingModel) {
+		
+		System.out.println();
 		productService.addProduct(productAddBindingModel);
 		
 		return "redirect:/products/add";
