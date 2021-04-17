@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.example.demo.model.binding.ProductAddBindingModel;
 import com.example.demo.model.binding.ProductBindingModel;
+import com.example.demo.model.enums.CategoryTypeEnum;
 import com.example.demo.services.ProductService;
 
 @Controller
@@ -27,9 +28,21 @@ public class ProductsController {
 
 
 	@GetMapping("/tea")
-	public String products(Model model) {
-		model.addAttribute("products", productService.getAllProducts());
+	public String tea(Model model) {
+		model.addAttribute("tea", productService.findAllProductsByCategoryName(CategoryTypeEnum.TEA));
 		return "product-tea";
+	}
+	
+	@GetMapping("/coffee")
+	public String coffee(Model model) {
+		model.addAttribute("coffee", productService.findAllProductsByCategoryName(CategoryTypeEnum.COFFEE));
+		return "product-coffee";
+	}
+	
+	@GetMapping("/nuts")
+	public String nuts(Model model) {
+		model.addAttribute("nuts", productService.findAllProductsByCategoryName(CategoryTypeEnum.NUTS));
+		return "product-nuts";
 	}
 	
 	@GetMapping("/add")

@@ -54,4 +54,11 @@ public class ProductServiceImpl implements ProductService{
 		productRepository.save(product);
 	}
 
+
+
+	@Override
+	public List<ProductEntity> findAllProductsByCategoryName(CategoryTypeEnum categoryName) {
+		return productRepository.findAllByCategory_Name(categoryName);
+	}
+
 }

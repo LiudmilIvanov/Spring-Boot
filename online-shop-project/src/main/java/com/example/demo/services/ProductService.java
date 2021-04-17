@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.example.demo.model.binding.ProductAddBindingModel;
 import com.example.demo.model.entities.ProductEntity;
+import com.example.demo.model.enums.CategoryTypeEnum;
 
 public interface ProductService {
 
@@ -11,4 +12,5 @@ public interface ProductService {
 
 	void addProduct(ProductAddBindingModel productAddBindingModel);
 
+	List<ProductEntity> findAllProductsByCategoryName(CategoryTypeEnum categoryName);
 }

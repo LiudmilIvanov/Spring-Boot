@@ -16,7 +16,8 @@ public interface ProductRepository extends JpaRepository<Product, Long>{
 	@Query("SELECT SUM(p.price) FROM Product p ")
 	BigDecimal findTotalProductsSum();
 
-	
 	List<Product> findAllByCategory_Name(CategoryTypeEnum categoryName);
+
+	
 	
 }
