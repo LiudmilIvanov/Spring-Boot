@@ -1,16 +1,22 @@
 package com.example.demo.web;
 
+import java.net.http.HttpRequest;
+import java.security.Principal;
+
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.example.demo.model.binding.ProductAddBindingModel;
-import com.example.demo.model.binding.ProductBindingModel;
 import com.example.demo.model.enums.CategoryTypeEnum;
+import com.example.demo.services.OrderService;
 import com.example.demo.services.ProductService;
 
 @Controller
@@ -18,11 +24,12 @@ import com.example.demo.services.ProductService;
 public class ProductsController {
 
 	private final ProductService productService;
-	
+	private final OrderService orderService;
 	
 	@Autowired
-	public ProductsController(ProductService productService) {
+	public ProductsController(ProductService productService, OrderService orderService) {
 		this.productService = productService;
+		this.orderService = orderService;
 	}
 
 
@@ -65,6 +72,22 @@ public class ProductsController {
 		
 		return "redirect:/products/add";
 	}
+	
+	@GetMapping("/buy/{id}")
+	public String buyProduct(@PathVariable Long id, HttpServletRequest request, Principal principal) {
+	//	String path = request.getContextPath();
+		//System.out.println();
+		orderService.addOrder(id, principal.getName());
+		
+		
+		
+		return "redirect:/cart";
+	}
+	
+	
+	
+	
+	
 	
 	/*@PostMapping("/tea")
 	public String viewProducts() {

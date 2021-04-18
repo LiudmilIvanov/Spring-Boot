@@ -47,7 +47,7 @@ public class ProductServiceImpl implements ProductService{
 	public void addProduct(ProductAddBindingModel productAddBindingModel) {
 		ProductEntity product =  modelMapper.map(productAddBindingModel, ProductEntity.class);
 		product.setCategory(categoryRepository.findByName(productAddBindingModel.getCategory()));
-		product.setPrice(new BigDecimal(1));
+		//product.setPrice(new BigDecimal(1));
 		product.setQuantity(1);
 		
 		
@@ -61,4 +61,18 @@ public class ProductServiceImpl implements ProductService{
 		return productRepository.findAllByCategory_Name(categoryName);
 	}
 
+
+
+	@Override
+	public ProductEntity findById(Long id) {
+		return productRepository.findById(id).orElse(null);
+		
+	}
+
+
+
+
+
+
+	
 }

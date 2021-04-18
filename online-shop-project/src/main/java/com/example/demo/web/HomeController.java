@@ -14,10 +14,10 @@ public class HomeController {
 
 
 	
-	/*@GetMapping("/products")
+	@GetMapping("/info")
 	public String products() {
-		return "products";
-	}*/
+		return "product-info";
+	}
 
 	@GetMapping("/orders")
 	public String orders() {

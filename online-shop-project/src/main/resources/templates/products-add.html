@@ -111,8 +111,8 @@
 
                                 <form action="/products/add" method="post" th:object="${productAddBindingModel}">
                                     <div class="form-group">
-                                        <label for="exampleInputEmail1">Product name:</label>
-                                        <input th:field="*{name}" type="text" class="form-control" id="exampleInputEmail1">
+                                        <label for="exampleInputEmail1"></label>
+                                        <input th:field="*{name}" type="text" class="form-control" id="exampleInputEmail1" placeholder="Product name:">
                                     </div>
 	                                   
                                       <select class="browser-default custom-select"  id="category" name="category">
@@ -123,13 +123,20 @@
 											></option>
            							 </select>
                                      <div class="form-group mb-5">
-                                        <label for="exampleInputPassword1">image URL</label>
-                                        <input th:field="*{imageUrl}" type="text" class="form-control" id="exampleInputPassword1">
+                                        <label for="exampleInputPassword1"></label>
+                                        <input th:field="*{imageUrl}" type="text" class="form-control" id="exampleInputPassword1" placeholder="image URL">
                                     </div>
+           						 <div>
+           						 <input th:field="*{price}"  type="number" step="0.1" class="form-control" id="price" name="price" placeholder="Select price:"/>
+           							 <small class="text-danger">Price error message</small>
+      									  </div>
+                                    
                                     
                                     <button type="submit" class="btn btn-theme">Add</button>
                                     <a href="#l" class="forgot-link float-right text-primary">Forgot password?</a>
+                                
                                 </form>
+                                
                             </div>
                         </div>
 
@@ -161,6 +168,7 @@
 </div>
   
   </div>
-  
+    <script src="/vendor/jquery/jquery.min.js"></script>
+  <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
   </body>
   </html>

@@ -17,7 +17,19 @@ public class ProductAddBindingModel {
 	
 	private CategoryTypeEnum category;
 	
+	private BigDecimal price;
 	
+	
+	
+	
+	public BigDecimal getPrice() {
+		return price;
+	}
+
+	public void setPrice(BigDecimal price) {
+		this.price = price;
+	}
+
 	public CategoryTypeEnum getCategory() {
 		return category;
 	}

@@ -10,4 +10,6 @@ public interface UserService {
 	void save(UserRegisterServiceModel userRegisterServiceModel);
 
 	Optional<UserEntity> findByUsername(String username);
+	
+	UserEntity findByName(String name);
 }

@@ -14,6 +14,7 @@ import com.example.demo.model.enums.CategoryTypeEnum;
 import com.example.demo.model.enums.RoleTypeEnum;
 import com.example.demo.repository.ProductRepository;
 import com.example.demo.services.CategoryService;
+import com.example.demo.services.OrderService;
 import com.example.demo.services.RoleService;
 
 @Component
@@ -22,13 +23,15 @@ public class ApplicationInit implements CommandLineRunner{
 	private final RoleService roleService;
 	private final ProductRepository productRepository;
 	private final CategoryService categoryService;
+	private final OrderService orderService;
 	
 	
 	@Autowired
-	public ApplicationInit(RoleService roleService, ProductRepository productRepository, CategoryService categoryService) {
+	public ApplicationInit(RoleService roleService, ProductRepository productRepository, CategoryService categoryService, OrderService orderService) {
 		this.roleService = roleService;
 		this.productRepository = productRepository;
 		this.categoryService = categoryService;
+		this.orderService = orderService;
 	}
 
 
@@ -37,6 +40,7 @@ public class ApplicationInit implements CommandLineRunner{
 	public void run(String... args) throws Exception {
 		intRoles();
 		initCategories();
+		deleteOrders();
 	/*	ProductEntity product = new ProductEntity();
 		product.setName("Black tea");
 		product.setImageUrl("https://teahousesofia.com/assets/teas/_51B3423_resized.jpg");
@@ -44,6 +48,12 @@ public class ApplicationInit implements CommandLineRunner{
 		
 		
 		productRepository.save(product);*/
+	}
+
+
+
+	private void deleteOrders() {
+		orderService.delete();
 	}
 
 

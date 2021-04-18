@@ -13,4 +13,8 @@ public interface ProductService {
 	void addProduct(ProductAddBindingModel productAddBindingModel);
 
 	List<ProductEntity> findAllProductsByCategoryName(CategoryTypeEnum categoryName);
+
+	ProductEntity findById(Long id);
+
+
 }

@@ -73,11 +73,14 @@
         <div class="card-body">
           <h4 class="card-title">
             <a th:text="*{name}" href="#">Project One</a>
+            <small th:text="|$ *{price}|"  > </small>
+            
           </h4>
+          
           <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur eum quasi sapiente nesciunt? Voluptatibus sit, repellat sequi itaque deserunt, dolores in, nesciunt, illum tempora ex quae? Nihil, dolorem!</p>
         	<div class="store-item-info clearfix">
                         <small><i class="fa fa-shopping-cart text-muted"></i>
-                        <a href="#" class="text-muted">Add to cart</a></small>
+                        <a th:href="@{/products/buy/{id}(id = *{id})}" class="text-muted">Add to cart</a></small>
                     </div>
         </div>
       </div>
