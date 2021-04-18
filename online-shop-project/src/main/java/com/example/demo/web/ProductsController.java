@@ -1,6 +1,5 @@
 package com.example.demo.web;
 
-import java.net.http.HttpRequest;
 import java.security.Principal;
 
 import javax.servlet.http.HttpServletRequest;
@@ -67,25 +66,46 @@ public class ProductsController {
 	@PostMapping("/add")
 	public String addProductConfirm(@ModelAttribute ProductAddBindingModel productAddBindingModel) {
 		
-		System.out.println();
 		productService.addProduct(productAddBindingModel);
 		
 		return "redirect:/products/add";
 	}
 	
 	@GetMapping("/buy/{id}")
-	public String buyProduct(@PathVariable Long id, HttpServletRequest request, Principal principal) {
+	public String buyProduct(@PathVariable Long id, Principal principal, Model model) {
 	//	String path = request.getContextPath();
-		//System.out.println();
+		if (!model.containsAttribute("productAddBindingModel")) {
+			model.addAttribute("productAddBindingModel", new ProductAddBindingModel());
+			System.out.println();
+		}
+		
+	
+		//TODO add relative path.
 		orderService.addOrder(id, principal.getName());
 		
 		
-		
-		return "redirect:/cart";
+		return "redirect:/products/info/{id}";
 	}
 	
+	/*@PostMapping("/buy/{id}")
+	public String buyProductConfirm(@PathVariable Long id, Principal principal,
+			@ModelAttribute ProductAddBindingModel productAddBindingModel) {
+		System.out.println();
+		return "redirect:/products/info/{id}";
+	}*/
+	
+/*	@PostMapping("/buy/{id}") 
+	public string buyProductConfirm() {
+		
+		return 
+	}*/
 	
 	
+	@GetMapping("/info/{id}")
+	public String viewProductDetails(@PathVariable Long id, Model model) {
+		model.addAttribute("product", productService.findById(id));
+		return "product-info";
+	}
 	
 	
 	

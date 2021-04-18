@@ -19,9 +19,18 @@ public class ProductAddBindingModel {
 	
 	private BigDecimal price;
 	
+	private long quantity;
 	
 	
 	
+	public long getQuantity() {
+		return quantity;
+	}
+
+	public void setQuantity(long quantity) {
+		this.quantity = quantity;
+	}
+
 	public BigDecimal getPrice() {
 		return price;
 	}

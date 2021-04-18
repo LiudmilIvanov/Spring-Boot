@@ -14,10 +14,7 @@ public class HomeController {
 
 
 	
-	@GetMapping("/info")
-	public String products() {
-		return "product-info";
-	}
+	
 
 	@GetMapping("/orders")
 	public String orders() {

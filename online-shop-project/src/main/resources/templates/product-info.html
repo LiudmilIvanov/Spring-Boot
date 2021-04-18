@@ -218,12 +218,12 @@
 <div class="container bootdey">
 <div class="col-md-12">
 <section class="panel">
-      <div class="panel-body">
+      <div	th:object=${product} class="panel-body">
           <div class="col-md-6">
               <div class="pro-img-details">
-                  <img src="https://via.placeholder.com/550x380/FFB6C1/000000" alt="">
+                  <img th:src="@{*{imageUrl}}" alt="">
               </div>
-              <div class="pro-img-list">
+        <!--     <div class="pro-img-list">
                   <a href="#">
                       <img src="https://via.placeholder.com/115x100/87CEFA/000000" alt="">
                   </a>
@@ -236,11 +236,11 @@
                   <a href="#">
                       <img src="https://via.placeholder.com/120x100/20B2AA/000000" alt="">
                   </a>
-              </div>
+              </div> --> 
           </div>
-          <div class="col-md-6">
+          <div  class="col-md-6">
               <h4 class="pro-d-title">
-                  <a href="#" class="">
+                  <a th:text="*{name}" href="#" class="">
                       Leopard Shirt Dress
                   </a>
               </h4>
@@ -248,16 +248,18 @@
                   Praesent ac condimentum felis. Nulla at nisl orci, at dignissim dolor, The best product descriptions address your ideal buyer directly and personally. The best product descriptions address your ideal buyer directly and personally.
               </p>
               <div class="product_meta">
-                  <span class="posted_in"> <strong>Categories:</strong> <a rel="tag" href="#">Jackets</a>, <a rel="tag" href="#">Men</a>, <a rel="tag" href="#">Shirts</a>, <a rel="tag" href="#">T-shirt</a>.</span>
+                  <span class="posted_in"> <strong>Categories:</strong> <a rel="tag" href="/products/tea" th:text="*{category.name}">Jackets</a><!-- , <a rel="tag" href="#">Men</a>, <a rel="tag" href="#">Shirts</a>, <a rel="tag" href="#">T-shirt</a>. --></span>
                   <span class="tagged_as"><strong>Tags:</strong> <a rel="tag" href="#">mens</a>, <a rel="tag" href="#">womens</a>.</span>
               </div>
-              <div class="m-bot15"> <strong>Price : </strong> <span class="amount-old">$544</span>  <span class="pro-price"> $300.00</span></div>
+              <div class="m-bot15"> <strong>Price : </strong> <!--   <span class="amount-old">$544</span> --> <span class="pro-price" th:text="|$ *{price}|"> $300.00</span></div>
               <div class="form-group">
                   <label>Quantity</label>
-                   <input type="number" step="0.1" class="form-control" id="price" name="price" placeholder="Select quantity:" style="width:150px;height:30px;border:1px solid #000;"/>
+                   <input  type="number" step="0.1" class="form-control" id="price" name="price" placeholder="Select quantity:" style="width:150px;height:30px;border:1px solid #000;"/>
               </div>
               <p>
-                  <button class="btn btn-round btn-danger" type="button"><i class="fa fa-shopping-cart"></i> Add to Cart</button>
+                  <a sec:authorize="isAuthenticated()" class="btn" th:href="@{/products/buy/{id}(id = *{id})}">
+                  <button class="btn btn-round btn-danger" type="button" ><i class="fa fa-shopping-cart"></i> Add to Cart</button>
+             </a>		
               </p>
           </div>
       </div>
