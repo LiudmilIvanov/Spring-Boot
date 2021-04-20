@@ -16,5 +16,7 @@ public interface ProductService {
 
 	ProductEntity findById(Long id);
 
+	List<ProductEntity> findAllByName(String name);
+	
 
 }

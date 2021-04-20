@@ -71,6 +71,17 @@ public class ProductServiceImpl implements ProductService{
 
 
 
+	@Override
+	public List<ProductEntity> findAllByName(String name) {
+		return productRepository.findAllByName(name);
+	}
+
+
+
+	
+
+
+
 
 
 

@@ -7,11 +7,13 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.demo.model.binding.ProductAddBindingModel;
 import com.example.demo.model.enums.CategoryTypeEnum;
@@ -34,20 +36,41 @@ public class ProductsController {
 
 
 	@GetMapping("/tea")
-	public String tea(Model model) {
-		model.addAttribute("tea", productService.findAllProductsByCategoryName(CategoryTypeEnum.TEA));
+	public String tea(@RequestParam(name = "keyword", required = false) String keyword,
+			Model model) {
+		if (keyword != null) {
+			model.addAttribute("tea", productService.findAllByName(keyword));
+		} else {
+			model.addAttribute("tea", productService.findAllProductsByCategoryName(CategoryTypeEnum.TEA));
+			
+		}
+		
 		return "product-tea";
 	}
 	
+	
+	
 	@GetMapping("/coffee")
-	public String coffee(Model model) {
-		model.addAttribute("coffee", productService.findAllProductsByCategoryName(CategoryTypeEnum.COFFEE));
+	public String coffee(@RequestParam(name = "keyword", required = false) String keyword, Model model) {
+		if (keyword != null) {
+			model.addAttribute("coffee", productService.findAllByName(keyword));
+			
+		} else {
+			model.addAttribute("coffee", productService.findAllProductsByCategoryName(CategoryTypeEnum.COFFEE));
+			
+		}
+		
 		return "product-coffee";
 	}
 	
 	@GetMapping("/nuts")
-	public String nuts(Model model) {
-		model.addAttribute("nuts", productService.findAllProductsByCategoryName(CategoryTypeEnum.NUTS));
+	public String nuts(@RequestParam(name = "keyword", required = false) String keyword, Model model) {
+		if (keyword != null) {
+			model.addAttribute("nuts", productService.findAllByName(keyword));
+		} else {
+			model.addAttribute("nuts", productService.findAllProductsByCategoryName(CategoryTypeEnum.NUTS));
+		}
+		
 		return "product-nuts";
 	}
 	
@@ -78,7 +101,6 @@ public class ProductsController {
 			model.addAttribute("productAddBindingModel", new ProductAddBindingModel());
 			System.out.println();
 		}
-		
 	
 		//TODO add relative path.
 		orderService.addOrder(id, principal.getName());
@@ -87,10 +109,12 @@ public class ProductsController {
 		return "redirect:/products/info/{id}";
 	}
 	
-	/*@PostMapping("/buy/{id}")
-	public String buyProductConfirm(@PathVariable Long id, Principal principal,
-			@ModelAttribute ProductAddBindingModel productAddBindingModel) {
+	
+/*	@PostMapping("/info/{id}")
+	public String buyProductConfirm(@ModelAttribute ProductAddBindingModel productAddBindingModel, @PathVariable Long id, Principal principal,
+		 BindingResult bindingResult) {
 		System.out.println();
+		orderService.addOrder(id, principal.getName());
 		return "redirect:/products/info/{id}";
 	}*/
 	
