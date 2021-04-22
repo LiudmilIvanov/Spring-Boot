@@ -2,7 +2,10 @@ package com.example.demo.services.impl;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Optional;
+import java.util.Random;
 
+import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
 
 import org.modelmapper.ModelMapper;
@@ -49,7 +52,7 @@ public class ProductServiceImpl implements ProductService{
 		product.setCategory(categoryRepository.findByName(productAddBindingModel.getCategory()));
 		//product.setPrice(new BigDecimal(1));
 		product.setQuantity(1);
-		
+		System.out.println();
 		
 		productRepository.save(product);
 	}
@@ -74,6 +77,24 @@ public class ProductServiceImpl implements ProductService{
 	@Override
 	public List<ProductEntity> findAllByName(String name) {
 		return productRepository.findAllByName(name);
+	}
+
+
+
+	@Override
+	public ProductEntity getRandomProduct() {
+		Random random = new Random();
+
+		long numberOfProducts = productRepository.count() - 1;
+		int productCounter = random.nextInt((int) numberOfProducts) + 1;
+		
+		Optional<ProductEntity> product = productRepository.findById((long) productCounter);
+		
+		if (!product.isPresent()) {
+			throw new EntityNotFoundException("Product is missing!");
+		}
+		
+		return product.get();
 	}
 
 

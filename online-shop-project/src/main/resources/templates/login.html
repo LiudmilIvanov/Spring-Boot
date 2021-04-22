@@ -73,7 +73,7 @@
 <div>
 
 <!-- Navigation -->
-  <nav th:replace="fragments/fragment :: navigation" class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+  <nav th:replace="fragments/fragment :: navigation('login')" class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
     <div class="container">
       <a class="navbar-brand" href="#">Start Bootstrap</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
@@ -117,7 +117,7 @@
                                 </div>
 
                                 <h6 class="h5 mb-0">Welcome back!</h6>
-                                <p class="text-muted mt-2 mb-5">Enter your email address and password to access admin panel.</p>
+                                <p class="text-muted mt-2 mb-5">Please enter your username and password:</p>
 
                                 <form action="/login" method="post" th:object="${userLoginBindingModel}">
                                     <div class="form-group">
@@ -139,10 +139,11 @@
                         <div class="col-lg-6 d-none d-lg-inline-block">
                             <div class="account-block rounded-right">
                                 <div class="overlay rounded-right"></div>
+                                 <img style="width:460px;height:580px;" src="https://i0.wp.com/theteacupoflife.com/wp-content/uploads/2020/07/Clemantine-Wamariya-Tea-Quote.png?fit=683%2C1024&ssl=1">
                                 <div class="account-testimonial">
-                                    <h4 class="text-white mb-4">This  beautiful theme yours!</h4>
+                                <!--     <h4 class="text-white mb-4">This  beautiful theme yours!</h4>
                                     <p class="lead text-white">"Best investment i made for a long time. Can only recommend it for other users."</p>
-                                    <p>- Admin User</p>
+                                    <p>- Admin User</p> -->
                                 </div>
                             </div>
                         </div>
@@ -153,7 +154,7 @@
             </div>
             <!-- end card -->
 
-            <p class="text-muted text-center mt-3 mb-0">Don't have an account? <a href="/register" class="text-primary ml-1">register</a></p>
+        <!--  -->    <p class="text-muted text-center mt-3 mb-0">Don't have an account? <a href="/register" class="text-primary ml-1">register</a></p>
 
             <!-- end row -->
 
@@ -162,7 +163,12 @@
     </div>
     <!-- Row -->
 </div>
-
+<footer th:replace="fragments/fragment :: footer" class="py-5 bg-dark">
+    <div class="container">
+      <p class="m-0 text-center text-white">Copyright &copy; Your Website 2020</p>
+    </div>
+    <!-- /.container -->
+  </footer>
 </div>
  <script src="vendor/jquery/jquery.min.js"></script>
   <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>

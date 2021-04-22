@@ -88,7 +88,7 @@ public class ProductsController {
 	
 	@PostMapping("/add")
 	public String addProductConfirm(@ModelAttribute ProductAddBindingModel productAddBindingModel) {
-		
+		System.out.println();
 		productService.addProduct(productAddBindingModel);
 		
 		return "redirect:/products/add";

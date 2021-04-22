@@ -65,7 +65,7 @@
   <body>
 
 <!-- Navigation -->
-  <nav th:replace="fragments/fragment :: navigation" class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+  <nav th:replace="fragments/fragment :: navigation('products')" class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
     <div class="container">
       <a class="navbar-brand" href="#">Start Bootstrap</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
@@ -106,8 +106,8 @@
                                     <h3 class="h4 font-weight-bold text-theme">Please select product:</h3>
                                 </div>
 
-                                <h6 class="h5 mb-0">Welcome back!</h6>
-                                <p class="text-muted mt-2 mb-5">Enter your email address and password to access admin panel.</p>
+                                <h6 class="h5 mb-0">Please add product:</h6>
+                                <p class="text-muted mt-2 mb-5">Enter product details and then click add.</p>
 
                                 <form action="/products/add" method="post" th:object="${productAddBindingModel}">
                                     <div class="form-group">
@@ -122,18 +122,25 @@
 				 							th:value="${c}"
 											></option>
            							 </select>
+                                   
+                                   
                                      <div class="form-group mb-5">
                                         <label for="exampleInputPassword1"></label>
                                         <input th:field="*{imageUrl}" type="text" class="form-control" id="exampleInputPassword1" placeholder="image URL">
                                     </div>
+                                    
+                                    
            						 <div>
            						 <input th:field="*{price}"  type="number" step="0.1" class="form-control" id="price" name="price" placeholder="Select price:"/>
            							 <small class="text-danger">Price error message</small>
       									  </div>
                                     
+                                    <div class="form-group">
+                                   <textarea th:field="*{description}" class="form-control" type="text" name="description" placeholder="Description"></textarea>
+                                    </div>
                                     
                                     <button type="submit" class="btn btn-theme">Add</button>
-                                    <a href="#l" class="forgot-link float-right text-primary">Forgot password?</a>
+                                    <a href="#l" class="forgot-link float-right text-primary"></a>
                                 
                                 </form>
                                 
@@ -142,11 +149,12 @@
 
                         <div class="col-lg-6 d-none d-lg-inline-block">
                             <div class="account-block rounded-right">
+								<img style="width:460px;height:690px;" src="https://i0.wp.com/theteacupoflife.com/wp-content/uploads/2020/07/Letitia-Baldrige-Tea-Quote.png?fit=683%2C1024&ssl=1" alt="Italian Trulli">
                                 <div class="overlay rounded-right"></div>
                                 <div class="account-testimonial">
-                                    <h4 class="text-white mb-4">This  beautiful theme yours!</h4>
+                                  <!--   <h4 class="text-white mb-4">This  beautiful theme yours!</h4>
                                     <p class="lead text-white">"Best investment i made for a long time. Can only recommend it for other users."</p>
-                                    <p>- Admin User</p>
+                                    <p>- Admin User</p> -->
                                 </div>
                             </div>
                         </div>

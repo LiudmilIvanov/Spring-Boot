@@ -41,6 +41,7 @@ public class ApplicationInit implements CommandLineRunner{
 		intRoles();
 		initCategories();
 		deleteOrders();
+		//productRepository.deleteAll();
 	/*	ProductEntity product = new ProductEntity();
 		product.setName("Black tea");
 		product.setImageUrl("https://teahousesofia.com/assets/teas/_51B3423_resized.jpg");

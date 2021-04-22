@@ -68,7 +68,7 @@ body {
 <body>
 
  <!-- Navigation -->
-  <nav th:replace="fragments/fragment :: navigation" class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+  <nav th:replace="fragments/fragment :: navigation('register')" class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
     <div class="container">
       <a class="navbar-brand" href="#">Start Bootstrap</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
@@ -136,11 +136,12 @@ body {
                         </div>
                         <div class="col-lg-6 d-none d-lg-inline-block">
                             <div class="account-block rounded-right">
+                              <img style="width:460px;height:730px;" src="https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/funny-coffee-quotes-bad-day-1557862252.png">
                                 <div class="overlay rounded-right"></div>
                                 <div class="account-testimonial">
-                                    <h4 class="text-white mb-4">This beautiful theme yours!</h4>
+                               <!--       <h4 class="text-white mb-4">This beautiful theme yours!</h4>
                                     <p class="lead text-white">"Best investment i made for a long time. Can only recommend it for other users."</p>
-                                    <p>- Admin User</p>
+                                    <p>- Admin User</p>-->
                                 </div>
                             </div>
                         </div>
@@ -155,12 +156,20 @@ body {
         <!-- end col -->
     </div>
     <!-- Row -->
+
+
 </div>
+
 
   <!-- Bootstrap core JavaScript -->
   <script src="vendor/jquery/jquery.min.js"></script>
   <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
 </body>
-
+<footer th:replace="fragments/fragment :: footer" class="py-5 bg-dark">
+    <div class="container">
+      <p class="m-0 text-center text-white">Copyright &copy; Your Website 2020</p>
+    </div>
+    <!-- /.container -->
+  </footer>
 </html>

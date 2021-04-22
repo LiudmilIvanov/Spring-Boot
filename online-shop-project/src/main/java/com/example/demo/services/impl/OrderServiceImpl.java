@@ -1,8 +1,6 @@
 package com.example.demo.services.impl;
 
-import java.time.Instant;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -46,16 +44,60 @@ public class OrderServiceImpl implements OrderService{
 		if (orderRepository.count() > 0) {
 			List<OrderEntity> orders = orderRepository
 					.findAllByUserAndIfPaidFalse(userService.findByName(name));
+			
+				List<ProductEntity> products = orders.get(0).getProducts();
+				
+				if (products.contains(productService.findById(id))) {
+					return;
+					
+				} else {
+					products.add(productService.findById(id));
+					
+					orders.get(0).setProducts(products);
+					
+				}
+				
+				
+		/*		products.stream().forEach(p -> {
+					String productNameTemp = p.getName();
+					
+					if (productNameTemp.equals(productService.findById(id).getName())) {
+					
+						//return;	
+					
+					} else {
+						
+						products.add(productService.findById(id));
+						
+						System.out.println();
+						
+						orders.get(0).setProducts(products);
+					}
+					
+					
+				});*/
+					
+				
+				
+			
+			
+			
+		/*	System.out.println();
+			
 			List<ProductEntity> products = orders.get(0).getProducts();
 			products.add(productService.findById(id));
 			
-			orders.get(0).setProducts(products);
+			System.out.println();
+			
+			orders.get(0).setProducts(products);*/
 		} else {
 			OrderEntity order = new OrderEntity();
 			order.setDate(LocalDateTime.now());
 			order.setUser(userService.findByName(name));
 			order.setProducts(List.of(productService.findById(id)));
 		
+			System.out.println();
+			
 			orderRepository.save(order);
 			
 		}

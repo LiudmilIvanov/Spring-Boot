@@ -5,6 +5,7 @@ import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -27,6 +28,7 @@ public class UserEntity extends BaseEntity{
 	private String password;
 	
 	@OneToMany(fetch = FetchType.EAGER)
+	@JoinColumn(name = "user_id")
 	List<RoleEntity> roles;
 	
 	public List<RoleEntity> getRoles() {

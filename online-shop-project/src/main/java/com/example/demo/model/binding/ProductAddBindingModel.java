@@ -21,8 +21,17 @@ public class ProductAddBindingModel {
 	
 	private long quantity;
 	
+	private String description;
 	
 	
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
 	public long getQuantity() {
 		return quantity;
 	}

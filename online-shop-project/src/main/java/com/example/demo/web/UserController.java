@@ -57,7 +57,7 @@ public class UserController {
 		
 			return "redirect:/login";
 		}
-
+		
 		//TODO
 		
 		return "redirect:/login";
@@ -65,7 +65,6 @@ public class UserController {
 	
 	@RequestMapping("/login-err")
 	public String loginErr(Model model) {
-		
 		model.addAttribute("loginErr", true);
 		return "redirect:/login";
 	}
