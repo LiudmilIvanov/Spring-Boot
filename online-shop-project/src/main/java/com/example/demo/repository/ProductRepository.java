@@ -1,5 +1,6 @@
 package com.example.demo.repository;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -19,4 +20,8 @@ public interface ProductRepository extends JpaRepository<ProductEntity, Long>{
 	List<ProductEntity> findAllByName(String name);
 	
 	List<ProductEntity> findAllByOrderByPriceAsc();
+	
+	@Query("SELECT SUM(p.price) FROM ProductEntity p ")
+	BigDecimal findTotalProductsSum();
+
 }

@@ -98,7 +98,14 @@ public class ProductServiceImpl implements ProductService{
 	}
 
 
-
+	@Override
+	public BigDecimal getTotalSum() {
+		if (productRepository.count() == 0) {
+			return new BigDecimal(0);
+		}
+		
+		return productRepository.findTotalProductsSum();
+	}
 	
 
 

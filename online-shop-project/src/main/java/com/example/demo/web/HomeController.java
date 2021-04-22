@@ -49,28 +49,6 @@ public class HomeController {
 	}
 
 
-
 	
-	
-
-	@GetMapping("/orders")
-	public String orders() {
-		return "orders";
 	}
 	
-	@GetMapping("/totalsum")
-	public String totalsum() {
-		return "totalsum";
-	}
-	
-	@GetMapping("/update")
-	public String update() {
-		return "updateInformation";
-	}
-	
-	@GetMapping("/user/profile")
-	public String profile() {
-		return "profile";
-	}
-	
-}

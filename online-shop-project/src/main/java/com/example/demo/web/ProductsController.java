@@ -110,13 +110,13 @@ public class ProductsController {
 	}
 	
 	
-/*	@PostMapping("/info/{id}")
+	@PostMapping("/info/{id}")
 	public String buyProductConfirm(@ModelAttribute ProductAddBindingModel productAddBindingModel, @PathVariable Long id, Principal principal,
 		 BindingResult bindingResult) {
 		System.out.println();
 		orderService.addOrder(id, principal.getName());
 		return "redirect:/products/info/{id}";
-	}*/
+	}
 	
 /*	@PostMapping("/buy/{id}") 
 	public string buyProductConfirm() {

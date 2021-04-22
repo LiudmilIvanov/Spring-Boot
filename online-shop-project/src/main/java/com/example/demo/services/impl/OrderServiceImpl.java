@@ -1,5 +1,6 @@
 package com.example.demo.services.impl;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -33,7 +34,7 @@ public class OrderServiceImpl implements OrderService{
 
 	@Override
 	public List<OrderEntity> getAllOrders() {
-		return orderRepository.findAll();
+		return orderRepository.findByIfPaidFalse();
 	}
 
 
@@ -111,6 +112,26 @@ public class OrderServiceImpl implements OrderService{
 	public void delete() {
 		orderRepository.deleteAll();
 		
+	}
+
+
+
+	@Override
+	public BigDecimal getTotalSum() {
+		List<OrderEntity> orders = orderRepository.findByIfPaidFalse();
+		if (orders.isEmpty()) {
+			BigDecimal totalPrice = new BigDecimal(0);
+			
+			return totalPrice;
+		} else {
+			BigDecimal totalPrice = orders.get(0).getProducts().stream()
+					.map(ProductEntity::getPrice)
+					.reduce(BigDecimal::add)
+				    .get();
+			return totalPrice;
+		}
+		
+ 		
 	}
 
 }

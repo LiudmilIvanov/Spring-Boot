@@ -11,7 +11,9 @@ import com.example.demo.model.entities.UserEntity;
 @Repository
 public interface OrderRepository extends JpaRepository<OrderEntity, Long>{
 
-	public boolean findByIfPaidFalse();
+//	public boolean findByIfPaidFalse();
 	
 	public List<OrderEntity> findAllByUserAndIfPaidFalse(UserEntity user);
+	
+	public List<OrderEntity> findByIfPaidFalse();
 }
