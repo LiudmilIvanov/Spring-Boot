@@ -37,13 +37,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	protected void configure(HttpSecurity http) throws Exception {
 		http
 			.authorizeRequests()
-			.anyRequest().permitAll()
+			//.anyRequest()
+			//.permitAll()
 			//.antMatchers("/home", "/register").permitAll()
-			//.antMatchers("/admin").hasRole("ADMIN")
+			.antMatchers("/products/add").hasRole("ADMIN")
 			//.antMatchers("/login").hasRole("USER")
 			.and().formLogin()
 			.loginPage("/login")
-			.failureUrl("/login-err")
+			//.failureUrl("/login-error")
 			.permitAll()
 			.and()
 			.logout()

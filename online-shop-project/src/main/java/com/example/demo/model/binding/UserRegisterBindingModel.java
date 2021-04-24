@@ -4,6 +4,9 @@ import javax.validation.constraints.Email;
 
 import org.hibernate.validator.constraints.Length;
 
+import com.example.demo.model.fieldmatch.FieldMatch;
+
+@FieldMatch(first = "password", second = "confirmPassword")
 public class UserRegisterBindingModel {
 
 	@Length(min = 3, max = 20)

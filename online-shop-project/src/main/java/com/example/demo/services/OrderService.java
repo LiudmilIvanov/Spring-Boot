@@ -14,6 +14,8 @@ public interface OrderService {
 	public void delete();
 	
 	public BigDecimal getTotalSum();
-	
+
+	public void removeById(Long id, String name);
+
 	
 }

@@ -12,4 +12,7 @@ public interface UserService {
 	Optional<UserEntity> findByUsername(String username);
 	
 	UserEntity findByName(String name);
+	
+	boolean existsByUsername(String username);
+	
 }

@@ -47,6 +47,7 @@ public class OrderServiceImpl implements OrderService{
 					.findAllByUserAndIfPaidFalse(userService.findByName(name));
 			
 				List<ProductEntity> products = orders.get(0).getProducts();
+
 				
 				if (products.contains(productService.findById(id))) {
 					return;
@@ -119,19 +120,39 @@ public class OrderServiceImpl implements OrderService{
 	@Override
 	public BigDecimal getTotalSum() {
 		List<OrderEntity> orders = orderRepository.findByIfPaidFalse();
+
 		if (orders.isEmpty()) {
 			BigDecimal totalPrice = new BigDecimal(0);
-			
+
 			return totalPrice;
 		} else {
-			BigDecimal totalPrice = orders.get(0).getProducts().stream()
-					.map(ProductEntity::getPrice)
-					.reduce(BigDecimal::add)
-				    .get();
-			return totalPrice;
+				
+				BigDecimal totalPrice = orders.get(0).getProducts().stream()
+						.map(ProductEntity::getPrice)
+						.reduce(BigDecimal::add)
+						.get();
+				
+				return totalPrice;
 		}
 		
  		
 	}
+
+
+
+	@Override
+	@Transactional
+	public void removeById(Long id, String name) {
+		List<OrderEntity> orders = orderRepository
+				.findAllByUserAndIfPaidFalse(userService.findByName(name));
+		
+		List<ProductEntity> products = orders.get(0).getProducts();
+	    products.removeIf(p -> p.getId() == id);
+		orders.get(0).setProducts(products);
+			
+	}
+
+
+
 
 }

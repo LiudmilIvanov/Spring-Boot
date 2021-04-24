@@ -3,8 +3,13 @@ package com.example.demo.services.impl;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.security.core.Authentication;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -24,6 +29,9 @@ public class UserServiceImpl implements UserService{
 	private final RoleService roleService;
 	
 	@Autowired
+	private UserDetailsService userDetailsService;
+	
+	@Autowired
 	public UserServiceImpl(UserRepository userRepository, ModelMapper modelMapper, PasswordEncoder passwordEncoder, RoleService roleService) {
 		this.userRepository = userRepository;
 		this.modelMapper = modelMapper;
@@ -36,10 +44,24 @@ public class UserServiceImpl implements UserService{
 	@Override
 	public void save(UserRegisterServiceModel userRegisterServiceModel) {
 		UserEntity user = modelMapper.map(userRegisterServiceModel, UserEntity.class);
+	
+		
 		user.setPassword(passwordEncoder.encode(userRegisterServiceModel.getPassword()));
-		user.setRoles(List.of(roleService.findByName(RoleTypeEnum.ROLE_ADMIN)));
+		user.setRoles(List.of(roleService.findByName(RoleTypeEnum.ROLE_USER)));
 		
 		userRepository.save(user);
+		
+		
+		UserDetails userDetails = userDetailsService.loadUserByUsername(user.getUsername());
+		
+		 Authentication authentication = new
+			        UsernamePasswordAuthenticationToken(
+			        userDetails,
+			        user.getPassword(),
+			        userDetails.getAuthorities()
+			       
+			    );
+			    SecurityContextHolder.getContext().setAuthentication(authentication);
 		
 	}
 
@@ -56,5 +78,14 @@ public class UserServiceImpl implements UserService{
 	public UserEntity findByName(String name) {
 		return userRepository.findByUsername(name).orElse(null);
 	}
+
+
+
+	@Override
+	public boolean existsByUsername(String username) {
+		return userRepository.existsByUsername(username);
+	}
+	
+	
 
 }

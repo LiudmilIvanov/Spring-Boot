@@ -99,7 +99,7 @@
 
           <div th:object="${productOne}" class="col-lg-4 col-md-6 mb-4">
             <div class="card h-100">
-              <a href="#"><img class="card-img-top" th:src="@{*{imageUrl}}" style="width:252px;height:200px;" alt=""></a>
+              <a th:href="@{/products/info/{id}(id = *{id})}"><img class="card-img-top" th:src="@{*{imageUrl}}" style="width:252px;height:200px;" alt=""></a>
               <div class="card-body">
                 <h4 class="card-title">
                   <a th:text="*{name}" href="#" >Item One</a>
@@ -115,7 +115,7 @@
 
          <div th:object="${productTwo}" class="col-lg-4 col-md-6 mb-4">
             <div class="card h-100">
-              <a href="#"><img class="card-img-top" th:src="@{*{imageUrl}}" style="width:252px;height:200px;" alt=""></a>
+              <a th:href="@{/products/info/{id}(id = *{id})}"><img class="card-img-top" th:src="@{*{imageUrl}}" style="width:252px;height:200px;" alt=""></a>
               <div class="card-body">
                 <h4 class="card-title">
                   <a th:text="*{name}" href="#" >Item One</a>
@@ -131,7 +131,7 @@
 
           <div th:object="${productThree}" class="col-lg-4 col-md-6 mb-4">
             <div class="card h-100">
-              <a href="#"><img class="card-img-top" th:src="@{*{imageUrl}}" style="width:252px;height:200px;" alt=""></a>
+              <a th:href="@{/products/info/{id}(id = *{id})}"><img class="card-img-top" th:src="@{*{imageUrl}}" style="width:252px;height:200px;" alt=""></a>
               <div class="card-body">
                 <h4 class="card-title">
                   <a th:text="*{name}" href="#" >Item One</a>
@@ -147,7 +147,7 @@
 
           <div th:object="${productFour}" class="col-lg-4 col-md-6 mb-4">
             <div class="card h-100">
-              <a href="#"><img class="card-img-top" th:src="@{*{imageUrl}}" style="width:252px;height:200px;" alt=""></a>
+              <a th:href="@{/products/info/{id}(id = *{id})}"><img class="card-img-top" th:src="@{*{imageUrl}}" style="width:252px;height:200px;" alt=""></a>
               <div class="card-body">
                 <h4 class="card-title">
                   <a th:text="*{name}" href="#" >Item One</a>
@@ -163,7 +163,7 @@
 
           <div th:object="${productFive}" class="col-lg-4 col-md-6 mb-4">
             <div class="card h-100">
-              <a href="#"><img class="card-img-top" th:src="@{*{imageUrl}}" style="width:252px;height:200px;" alt=""></a>
+              <a th:href="@{/products/info/{id}(id = *{id})}"><img class="card-img-top" th:src="@{*{imageUrl}}" style="width:252px;height:200px;" alt=""></a>
               <div class="card-body">
                 <h4 class="card-title">
                   <a th:text="*{name}" href="#" >Item One</a>
@@ -179,7 +179,7 @@
 
           <div class="col-lg-4 col-md-6 mb-4">
             <div class="card h-100">
-              <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
+              <a th:href="@{/products/info/{id}(id = *{id})}"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
               <div class="card-body">
                 <h4 class="card-title">
                   <a href="#">Item Six</a>

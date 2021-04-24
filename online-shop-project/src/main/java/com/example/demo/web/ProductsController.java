@@ -5,6 +5,7 @@ import java.security.Principal;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -86,6 +87,7 @@ public class ProductsController {
 		return "products-add";
 	}
 	
+	@PreAuthorize("hasRole('ADMIN')")
 	@PostMapping("/add")
 	public String addProductConfirm(@ModelAttribute ProductAddBindingModel productAddBindingModel) {
 		System.out.println();
@@ -111,18 +113,13 @@ public class ProductsController {
 	
 	
 	@PostMapping("/info/{id}")
-	public String buyProductConfirm(@ModelAttribute ProductAddBindingModel productAddBindingModel, @PathVariable Long id, Principal principal,
+	public String buyProductConfirm(@ModelAttribute ProductAddBindingModel productAddBindingModel, 
+			@PathVariable Long id, Principal principal,
 		 BindingResult bindingResult) {
 		System.out.println();
 		orderService.addOrder(id, principal.getName());
 		return "redirect:/products/info/{id}";
 	}
-	
-/*	@PostMapping("/buy/{id}") 
-	public string buyProductConfirm() {
-		
-		return 
-	}*/
 	
 	
 	@GetMapping("/info/{id}")
@@ -133,9 +130,5 @@ public class ProductsController {
 	
 	
 	
-	/*@PostMapping("/tea")
-	public String viewProducts() {
-		
-		return "products-tea";
-	}*/
+	
 }
