@@ -16,4 +16,6 @@ public interface OrderRepository extends JpaRepository<OrderEntity, Long>{
 	public List<OrderEntity> findAllByUserAndIfPaidFalse(UserEntity user);
 	
 	public List<OrderEntity> findByIfPaidFalse();
+	
+	public List<OrderEntity> findByIfPaidTrue();
 }

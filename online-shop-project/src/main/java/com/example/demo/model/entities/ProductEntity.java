@@ -1,9 +1,11 @@
 package com.example.demo.model.entities;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.DecimalMin;
@@ -34,11 +36,10 @@ public class ProductEntity extends BaseEntity {
 	
 	@Column(columnDefinition = "TEXT")
 	private String description;
-	
-	
-	
-	
 
+	@ManyToMany(mappedBy = "products")
+	List<OrderEntity> orders;
+	
 	public String getDescription() {
 		return description;
 	}

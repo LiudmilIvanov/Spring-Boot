@@ -101,7 +101,6 @@ public class ProductsController {
 	//	String path = request.getContextPath();
 		if (!model.containsAttribute("productAddBindingModel")) {
 			model.addAttribute("productAddBindingModel", new ProductAddBindingModel());
-			System.out.println();
 		}
 	
 		//TODO add relative path.

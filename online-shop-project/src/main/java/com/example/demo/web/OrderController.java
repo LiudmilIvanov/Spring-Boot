@@ -43,4 +43,11 @@ public class OrderController {
 		
 	}
 	
+	@GetMapping("/cart/buy")
+	public String proceed(Principal principal) {
+		orderService.buyProducts(principal.getName());
+		
+		
+		return "redirect:/";
+	}
 }

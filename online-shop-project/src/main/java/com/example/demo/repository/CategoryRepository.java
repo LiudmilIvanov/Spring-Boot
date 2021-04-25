@@ -8,7 +8,7 @@ import com.example.demo.model.enums.CategoryTypeEnum;
 
 @Repository
 public interface CategoryRepository extends JpaRepository<CategoryEntity, Long>{
-
+	
 	public CategoryEntity findByName(CategoryTypeEnum name);
 	
 }

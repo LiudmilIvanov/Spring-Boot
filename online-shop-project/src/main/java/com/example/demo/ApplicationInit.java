@@ -40,7 +40,7 @@ public class ApplicationInit implements CommandLineRunner{
 	public void run(String... args) throws Exception {
 		intRoles();
 		initCategories();
-		deleteOrders();
+		//deleteOrders();
 		//productRepository.deleteAll();
 	/*	ProductEntity product = new ProductEntity();
 		product.setName("Black tea");

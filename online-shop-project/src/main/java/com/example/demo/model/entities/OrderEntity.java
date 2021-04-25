@@ -1,5 +1,6 @@
 package com.example.demo.model.entities;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -7,6 +8,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -24,13 +27,26 @@ public class OrderEntity extends BaseEntity{
 	@Column(name = "if_paid")
 	private boolean ifPaid = false;
 	
-	@OneToMany
+	@Column
+	private BigDecimal totalSum;
+	
+	@ManyToMany
+	@JoinTable(name = "orders_products", joinColumns = @JoinColumn(name = "products_id", referencedColumnName = "ID"), 
+	inverseJoinColumns = @JoinColumn(name = "orders_id", referencedColumnName = "ID"))
 	private List<ProductEntity> products;
 	
 	@OneToOne
 	private UserEntity user;
 
 	
+	public BigDecimal getTotalSum() {
+		return totalSum;
+	}
+
+	public void setTotalSum(BigDecimal totalSum) {
+		this.totalSum = totalSum;
+	}
+
 	public UserEntity getUser() {
 		return user;
 	}

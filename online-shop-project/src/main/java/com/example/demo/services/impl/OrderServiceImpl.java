@@ -42,12 +42,11 @@ public class OrderServiceImpl implements OrderService{
 	@Override
 	@Transactional
 	public void addOrder(Long id, String name) {
-		if (orderRepository.count() > 0) {
-			List<OrderEntity> orders = orderRepository
-					.findAllByUserAndIfPaidFalse(userService.findByName(name));
-			
-				List<ProductEntity> products = orders.get(0).getProducts();
-
+		List<OrderEntity> orders = orderRepository
+				.findAllByUserAndIfPaidFalse(userService.findByName(name));
+		System.out.println();
+		if (!orders.isEmpty()) {
+					List<ProductEntity> products = orders.get(0).getProducts();
 				
 				if (products.contains(productService.findById(id))) {
 					return;
@@ -55,58 +54,27 @@ public class OrderServiceImpl implements OrderService{
 				} else {
 					products.add(productService.findById(id));
 					
+					orders.get(0).setTotalSum(calculateTotalSum(orders.get(0).getProducts()));
 					orders.get(0).setProducts(products);
 					
 				}
-				
-				
-		/*		products.stream().forEach(p -> {
-					String productNameTemp = p.getName();
-					
-					if (productNameTemp.equals(productService.findById(id).getName())) {
-					
-						//return;	
-					
-					} else {
-						
-						products.add(productService.findById(id));
-						
-						System.out.println();
-						
-						orders.get(0).setProducts(products);
-					}
-					
-					
-				});*/
-					
-				
-				
+		
 			
-			
-			
-		/*	System.out.println();
-			
-			List<ProductEntity> products = orders.get(0).getProducts();
-			products.add(productService.findById(id));
-			
-			System.out.println();
-			
-			orders.get(0).setProducts(products);*/
 		} else {
 			OrderEntity order = new OrderEntity();
 			order.setDate(LocalDateTime.now());
 			order.setUser(userService.findByName(name));
 			order.setProducts(List.of(productService.findById(id)));
-		
-			System.out.println();
+			order.setTotalSum(calculateTotalSum(order.getProducts()));
+			
 			
 			orderRepository.save(order);
-			
+			System.out.println();
 		}
 		
 		
 	}
-
+	
 
 
 	@Override
@@ -152,6 +120,47 @@ public class OrderServiceImpl implements OrderService{
 			
 	}
 
+
+
+	@Override
+	@Transactional
+	public void buyProducts(String name) {
+		List<OrderEntity> orders = orderRepository
+				.findAllByUserAndIfPaidFalse(userService.findByName(name));
+		
+		if (!orders.isEmpty()) {
+			System.out.println();
+			orders.get(0).setIfPaid(true);
+		}
+		
+	}
+
+
+
+	@Override
+	public List<OrderEntity> getPaidOrders() {
+		return orderRepository.findByIfPaidTrue();
+	}
+
+	public BigDecimal calculateTotalSum(List<ProductEntity> products) {
+
+		BigDecimal totalPrice = products.stream()
+				.map(ProductEntity::getPrice)
+				.reduce(BigDecimal::add)
+				.get();
+		
+		return totalPrice;
+		
+	}
+
+
+
+	@Override
+	public OrderEntity getOrderById(Long id) {
+		return orderRepository.findById(id).get();
+	}
+
+	
 
 
 
