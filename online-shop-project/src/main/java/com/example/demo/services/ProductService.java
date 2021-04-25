@@ -7,20 +7,21 @@ import java.util.Optional;
 import com.example.demo.model.binding.ProductAddBindingModel;
 import com.example.demo.model.entities.ProductEntity;
 import com.example.demo.model.enums.CategoryTypeEnum;
+import com.example.demo.model.services.ProductServiceModel;
 
 public interface ProductService {
 
-	List<ProductEntity> getAllProducts();
+	List<ProductServiceModel> getAllProducts();
 
 	void addProduct(ProductAddBindingModel productAddBindingModel);
 
-	List<ProductEntity> findAllProductsByCategoryName(CategoryTypeEnum categoryName);
+	List<ProductServiceModel> findAllProductsByCategoryName(CategoryTypeEnum categoryName);
 
-	ProductEntity findById(Long id);
+	ProductServiceModel findById(Long id);
 
-	List<ProductEntity> findAllByName(String name);
+	List<ProductServiceModel> findAllByName(String name);
 	
-	public ProductEntity getRandomProduct();
+	public ProductServiceModel getRandomProduct();
 	
 	public BigDecimal getTotalSum();
 	

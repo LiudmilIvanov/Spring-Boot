@@ -3,14 +3,21 @@ package com.example.demo.services.impl;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
+import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.model.entities.OrderEntity;
 import com.example.demo.model.entities.ProductEntity;
+import com.example.demo.model.entities.UserEntity;
+import com.example.demo.model.services.OrderServiceModel;
+import com.example.demo.model.services.ProductServiceModel;
 import com.example.demo.repository.OrderRepository;
 import com.example.demo.services.OrderService;
 import com.example.demo.services.ProductService;
@@ -22,19 +29,36 @@ public class OrderServiceImpl implements OrderService{
 	private final OrderRepository orderRepository;
 	private final ProductService productService;
 	private final UserService userService;
+	private final ModelMapper modelMapper;
 	
 	@Autowired
-	public OrderServiceImpl(OrderRepository orderRepository, ProductService productService, UserService userService) {
+	public OrderServiceImpl(OrderRepository orderRepository, ProductService productService, 
+			UserService userService, ModelMapper modelMapper) {
 		this.orderRepository = orderRepository;
 		this.productService = productService;
 		this.userService = userService;
+		this.modelMapper = modelMapper;
 	}
 
 
 
 	@Override
-	public List<OrderEntity> getAllOrders() {
-		return orderRepository.findByIfPaidFalse();
+	public List<OrderServiceModel> getAllOrders() {
+		List<OrderServiceModel> orderServiceModels = orderRepository.findByIfPaidFalse()
+				.stream()
+				.map(o -> {
+			OrderServiceModel orderServiceModel = modelMapper.map(o, OrderServiceModel.class);
+			
+			orderServiceModel.getProducts().stream().map(p -> {
+				ProductServiceModel productServiceModel = modelMapper.map(p,ProductServiceModel.class);
+				
+				return productServiceModel;
+			}).collect(Collectors.toList());
+			
+			return orderServiceModel;
+		}).collect(Collectors.toList());
+				
+		return orderServiceModels;
 	}
 
 
@@ -43,16 +67,16 @@ public class OrderServiceImpl implements OrderService{
 	@Transactional
 	public void addOrder(Long id, String name) {
 		List<OrderEntity> orders = orderRepository
-				.findAllByUserAndIfPaidFalse(userService.findByName(name));
-		System.out.println();
+				.findAllByUserAndIfPaidFalse(modelMapper.map(userService.findByName(name), UserEntity.class));
+
 		if (!orders.isEmpty()) {
 					List<ProductEntity> products = orders.get(0).getProducts();
 				
-				if (products.contains(productService.findById(id))) {
+				if (products.contains(modelMapper.map(productService.findById(id), ProductEntity.class))) {
 					return;
 					
 				} else {
-					products.add(productService.findById(id));
+					products.add(modelMapper.map(productService.findById(id), ProductEntity.class));
 					
 					orders.get(0).setTotalSum(calculateTotalSum(orders.get(0).getProducts()));
 					orders.get(0).setProducts(products);
@@ -63,8 +87,8 @@ public class OrderServiceImpl implements OrderService{
 		} else {
 			OrderEntity order = new OrderEntity();
 			order.setDate(LocalDateTime.now());
-			order.setUser(userService.findByName(name));
-			order.setProducts(List.of(productService.findById(id)));
+			order.setUser(modelMapper.map(userService.findByName(name), UserEntity.class));
+			order.setProducts(List.of(modelMapper.map(productService.findById(id), ProductEntity.class)));
 			order.setTotalSum(calculateTotalSum(order.getProducts()));
 			
 			
@@ -112,7 +136,8 @@ public class OrderServiceImpl implements OrderService{
 	@Transactional
 	public void removeById(Long id, String name) {
 		List<OrderEntity> orders = orderRepository
-				.findAllByUserAndIfPaidFalse(userService.findByName(name));
+				.findAllByUserAndIfPaidFalse(modelMapper
+						.map(userService.findByName(name), UserEntity.class));
 		
 		List<ProductEntity> products = orders.get(0).getProducts();
 	    products.removeIf(p -> p.getId() == id);
@@ -126,10 +151,10 @@ public class OrderServiceImpl implements OrderService{
 	@Transactional
 	public void buyProducts(String name) {
 		List<OrderEntity> orders = orderRepository
-				.findAllByUserAndIfPaidFalse(userService.findByName(name));
+				.findAllByUserAndIfPaidFalse(modelMapper
+						.map(userService.findByName(name), UserEntity.class));
 		
 		if (!orders.isEmpty()) {
-			System.out.println();
 			orders.get(0).setIfPaid(true);
 		}
 		
@@ -138,8 +163,23 @@ public class OrderServiceImpl implements OrderService{
 
 
 	@Override
-	public List<OrderEntity> getPaidOrders() {
-		return orderRepository.findByIfPaidTrue();
+	public List<OrderServiceModel> getPaidOrders() {
+		List<OrderServiceModel> orderServiceModels = orderRepository.findByIfPaidTrue()
+				.stream()
+				.map(o -> {
+			OrderServiceModel orderServiceModel = modelMapper.map(o, OrderServiceModel.class);
+			
+			orderServiceModel.getProducts().stream().map(p -> {
+				ProductServiceModel productServiceModel = modelMapper.map(p,ProductServiceModel.class);
+				
+				return productServiceModel;
+			}).collect(Collectors.toList());
+			
+			return orderServiceModel;
+		}).collect(Collectors.toList());
+		
+		
+		return orderServiceModels;
 	}
 
 	public BigDecimal calculateTotalSum(List<ProductEntity> products) {
@@ -156,8 +196,19 @@ public class OrderServiceImpl implements OrderService{
 
 
 	@Override
-	public OrderEntity getOrderById(Long id) {
-		return orderRepository.findById(id).get();
+	public OrderServiceModel getOrderById(Long id) {
+		Optional<OrderEntity> order = orderRepository.findById(id);
+		
+		if (!order.isPresent()) {
+			throw new EntityNotFoundException("Order not found!");
+		} else {
+			
+			OrderServiceModel orderServiceModel = modelMapper
+					.map(orderRepository.findById(id).get(), OrderServiceModel.class) ;
+
+			return orderServiceModel;
+		}
+		
 	}
 
 	

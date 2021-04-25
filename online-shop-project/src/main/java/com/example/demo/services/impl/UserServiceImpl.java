@@ -3,6 +3,8 @@ package com.example.demo.services.impl;
 import java.util.List;
 import java.util.Optional;
 
+import javax.persistence.EntityNotFoundException;
+
 import org.springframework.security.core.Authentication;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +19,7 @@ import com.example.demo.model.binding.UserUpdateBindingModel;
 import com.example.demo.model.entities.UserEntity;
 import com.example.demo.model.enums.RoleTypeEnum;
 import com.example.demo.model.services.UserRegisterServiceModel;
+import com.example.demo.model.services.UserServiceModel;
 import com.example.demo.repository.UserRepository;
 import com.example.demo.services.RoleService;
 import com.example.demo.services.UserService;
@@ -70,14 +73,23 @@ public class UserServiceImpl implements UserService{
 
 	@Override
 	public Optional<UserEntity> findByUsername(String username) {
-		return userRepository.findByUsername(username);
+			return userRepository.findByUsername(username);
+		
 	}
 
 
 
 	@Override
-	public UserEntity findByName(String name) {
-		return userRepository.findByUsername(name).orElse(null);
+	public UserServiceModel findByName(String name) {
+		Optional<UserEntity> userOpt = userRepository.findByUsername(name);
+		if (!userOpt.isPresent()) {
+			throw new EntityNotFoundException("User was not found!");
+			
+		} else {
+			UserServiceModel userServiceModel = modelMapper.map(userOpt.get(), UserServiceModel.class);
+
+			return userServiceModel;
+		}
 	}
 
 

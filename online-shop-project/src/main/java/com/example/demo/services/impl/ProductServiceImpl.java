@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 import java.util.Random;
+import java.util.stream.Collectors;
 
 import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
@@ -17,6 +18,7 @@ import com.example.demo.model.entities.CategoryEntity;
 import com.example.demo.model.entities.ProductEntity;
 import com.example.demo.model.enums.CategoryTypeEnum;
 import com.example.demo.model.services.CategoryServiceModel;
+import com.example.demo.model.services.ProductServiceModel;
 import com.example.demo.repository.CategoryRepository;
 import com.example.demo.repository.ProductRepository;
 import com.example.demo.services.CategoryService;
@@ -39,8 +41,12 @@ public class ProductServiceImpl implements ProductService{
 
 
 	@Override
-	public List<ProductEntity> getAllProducts() {
-		return productRepository.findAll();
+	public List<ProductServiceModel> getAllProducts() {
+		return productRepository.findAll().stream().map(p -> {
+			ProductServiceModel productServiceModel = modelMapper.map(p, ProductServiceModel.class);
+			
+			return productServiceModel;
+		}).collect(Collectors.toList());
 	}
 
 
@@ -50,9 +56,7 @@ public class ProductServiceImpl implements ProductService{
 	public void addProduct(ProductAddBindingModel productAddBindingModel) {
 		ProductEntity product =  modelMapper.map(productAddBindingModel, ProductEntity.class);
 		product.setCategory(categoryRepository.findByName(productAddBindingModel.getCategory()));
-		//product.setPrice(new BigDecimal(1));
 		product.setQuantity(1);
-		System.out.println();
 		
 		productRepository.save(product);
 	}
@@ -60,29 +64,45 @@ public class ProductServiceImpl implements ProductService{
 
 
 	@Override
-	public List<ProductEntity> findAllProductsByCategoryName(CategoryTypeEnum categoryName) {
-		return productRepository.findAllByCategory_Name(categoryName);
+	public List<ProductServiceModel> findAllProductsByCategoryName(CategoryTypeEnum categoryName) {
+		return productRepository.findAllByCategory_Name(categoryName)
+				.stream()
+				.map(p -> {
+			ProductServiceModel productServiceModel = modelMapper.map(p, ProductServiceModel.class);
+			
+			return productServiceModel;
+		}).collect(Collectors.toList());
 	}
 
 
 
 	@Override
-	public ProductEntity findById(Long id) {
-		return productRepository.findById(id).orElse(null);
+	public ProductServiceModel findById(Long id) {
+		Optional<ProductEntity> product = productRepository.findById(id); 
+		
+		if (!product.isPresent()) {
+			throw new EntityNotFoundException("Product cannot be found!");
+		} else {
+			return modelMapper.map(product.get(), ProductServiceModel.class);
+		}
 		
 	}
 
 
 
 	@Override
-	public List<ProductEntity> findAllByName(String name) {
-		return productRepository.findAllByName(name);
+	public List<ProductServiceModel> findAllByName(String name) {
+		return productRepository.findAllByName(name).stream().map(p -> {
+			ProductServiceModel productServiceModel = modelMapper.map(p, ProductServiceModel.class);
+			
+			return productServiceModel;
+		}).collect(Collectors.toList());
 	}
 
 
 
 	@Override
-	public ProductEntity getRandomProduct() {
+	public ProductServiceModel getRandomProduct() {
 		Random random = new Random();
 
 		long numberOfProducts = productRepository.count() - 1;
@@ -93,8 +113,8 @@ public class ProductServiceImpl implements ProductService{
 		if (!product.isPresent()) {
 			throw new EntityNotFoundException("Product is missing!");
 		}
-		
-		return product.get();
+		return modelMapper
+				.map(product.get(), ProductServiceModel.class);
 	}
 
 

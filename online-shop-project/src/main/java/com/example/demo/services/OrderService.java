@@ -4,10 +4,11 @@ import java.math.BigDecimal;
 import java.util.List;
 
 import com.example.demo.model.entities.OrderEntity;
+import com.example.demo.model.services.OrderServiceModel;
 
 public interface OrderService {
 
-	public List<OrderEntity> getAllOrders();
+	public List<OrderServiceModel> getAllOrders();
 
 	public void addOrder(Long id, String name);
 
@@ -19,8 +20,8 @@ public interface OrderService {
 	
 	public void buyProducts(String name);
 	
-	public List<OrderEntity> getPaidOrders();
+	public List<OrderServiceModel> getPaidOrders();
 	
-	public OrderEntity getOrderById(Long id);
+	public OrderServiceModel getOrderById(Long id);
 
 }

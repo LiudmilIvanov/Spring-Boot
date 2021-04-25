@@ -17,12 +17,10 @@ import com.example.demo.services.ProductService;
 public class OrderController {
 
 	private final OrderService orderService;
-	private final ProductService productService;
 	
 	@Autowired
-	public OrderController(OrderService orderService, ProductService productService) {
+	public OrderController(OrderService orderService) {
 		this.orderService = orderService;
-		this.productService = productService;
 	}
 
 
