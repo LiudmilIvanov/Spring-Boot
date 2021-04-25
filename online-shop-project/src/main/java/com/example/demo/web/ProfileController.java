@@ -6,9 +6,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.example.demo.model.binding.UserUpdateBindingModel;
 import com.example.demo.services.OrderService;
 import com.example.demo.services.UserService;
 
@@ -43,4 +46,22 @@ public class ProfileController {
 		
 		return "details";
 	}
+	
+	@GetMapping("/profile/update")
+	public String updateInformation(Model model) {
+		if (!model.containsAttribute("userUpdateBindingModel")) {
+			model.addAttribute("userUpdateBindingModel", new UserUpdateBindingModel());
+		}
+		
+		return "update-information";
+	}
+	
+	@PostMapping("/profile/update")
+	public String updateInformationConfirm(@ModelAttribute UserUpdateBindingModel userUpdateBindingModel,
+			Principal principal) {
+		userService.updateUserInformation(userUpdateBindingModel, principal.getName());
+		
+		return "redirect:/user/profile";
+	}
+		
 }

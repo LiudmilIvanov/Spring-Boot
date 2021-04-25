@@ -2,6 +2,7 @@ package com.example.demo.services;
 
 import java.util.Optional;
 
+import com.example.demo.model.binding.UserUpdateBindingModel;
 import com.example.demo.model.entities.UserEntity;
 import com.example.demo.model.services.UserRegisterServiceModel;
 
@@ -14,5 +15,7 @@ public interface UserService {
 	UserEntity findByName(String name);
 	
 	boolean existsByUsername(String username);
+
+	void updateUserInformation(UserUpdateBindingModel userUpdateBindingModel, String name);
 	
 }

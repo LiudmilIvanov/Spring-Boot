@@ -15,7 +15,6 @@
 
   <!-- Custom styles for this template -->
   <link href="/css/shop-homepage.css" rel="stylesheet">
-	<link rel="stylesheet" th:href="@{/css/styles.css}" type="text/css">
  <style>
  
  body{
@@ -262,9 +261,7 @@ hr {
           <!-- Breadcrumb -->
           <nav aria-label="breadcrumb" class="main-breadcrumb">
             <ol class="breadcrumb">
-              <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-              <li class="breadcrumb-item"><a href="javascript:void(0)">User</a></li>
-              <li class="breadcrumb-item active" aria-current="page">User Profile</li>
+              <li class="breadcrumb-item"><a href="javascript:void(0)"></a></li>
             </ol>
           </nav>
           <!-- /Breadcrumb -->
@@ -277,10 +274,11 @@ hr {
                     <img src="https://qph.fs.quoracdn.net/main-qimg-2b21b9dd05c757fe30231fac65b504dd" alt="Admin" class="rounded-circle" width="150">
                     <div class="mt-3">
                       <h4 th:text="*{username}">John Doe</h4>
-                      <p class="text-secondary mb-1">Full Stack Developer</p>
-                      <p class="text-muted font-size-sm">Bay Area, San Francisco, CA</p>
-                      <button class="btn btn-primary">Follow</button>
-                      <button class="btn btn-outline-primary">Message</button>
+                      <p class="text-secondary mb-1"></p>
+                      <p class="text-muted font-size-sm"></p>
+                   
+                      <a th:href="@{/user/profile/update}" class="btn btn-dark rounded-pill py-2 btn-block">Update information</a>
+                      
                     </div>
                   </div>
                 </div>
@@ -333,19 +331,19 @@ hr {
                   <hr>
                   <div class="row">
                     <div class="col-sm-3">
-                      <h6 class="mb-0">Phone</h6>
+                      <h6 class="mb-0">Mobile</h6>
                     </div>
-                    <div class="col-sm-9 text-secondary">
+                    <div class="col-sm-9 text-secondary" th:text="*{phoneNumber}">
                       (239) 816-9029
                     </div>
                   </div>
                   <hr>
                   <div class="row">
                     <div class="col-sm-3">
-                      <h6 class="mb-0">Mobile</h6>
+                      <h6 class="mb-0">Phone</h6>
                     </div>
                     <div class="col-sm-9 text-secondary">
-                      (320) 380-4539
+                      
                     </div>
                   </div>
                   <hr>
@@ -353,7 +351,7 @@ hr {
                     <div class="col-sm-3">
                       <h6 class="mb-0">Address</h6>
                     </div>
-                    <div class="col-sm-9 text-secondary">
+                    <div class="col-sm-9 text-secondary" th:text="|*{city}, *{street}|">
                       Bay Area, San Francisco, CA
                     </div>
                   </div>
@@ -562,9 +560,9 @@ hr {
 
 	
 
-
+	<script src="vendor/jquery/jquery.min.js"></script>
+  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
 </body>
-<script src="vendor/jquery/jquery.min.js"></script>
-  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+ 
 </html>

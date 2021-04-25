@@ -13,6 +13,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.example.demo.model.binding.UserUpdateBindingModel;
 import com.example.demo.model.entities.UserEntity;
 import com.example.demo.model.enums.RoleTypeEnum;
 import com.example.demo.model.services.UserRegisterServiceModel;
@@ -84,6 +85,19 @@ public class UserServiceImpl implements UserService{
 	@Override
 	public boolean existsByUsername(String username) {
 		return userRepository.existsByUsername(username);
+	}
+
+
+
+	@Override
+	public void updateUserInformation(UserUpdateBindingModel userUpdateBindingModel, String name) {
+		UserEntity userEntity = userRepository.findByUsername(name).get();
+		userEntity.setEmail(userUpdateBindingModel.getEmail());
+		userEntity.setPhoneNumber(userUpdateBindingModel.getPhoneNumber());
+		userEntity.setCity(userUpdateBindingModel.getCity());
+		userEntity.setStreet(userUpdateBindingModel.getStreet());
+		
+		userRepository.save(userEntity);
 	}
 	
 	

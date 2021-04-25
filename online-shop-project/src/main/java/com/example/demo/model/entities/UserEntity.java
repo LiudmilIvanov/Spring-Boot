@@ -29,10 +29,38 @@ public class UserEntity extends BaseEntity{
 	@Column(nullable = false)
 	private String password;
 	
+	@Column
+	private Integer phoneNumber;
+	
+	@Column
+	private String street;
+	
+	@Column
+	private String city;
+	
 	@OneToMany(fetch = FetchType.EAGER)
 	@JoinColumn(name = "user_id")
 	List<RoleEntity> roles;
 	
+	
+	public int getPhoneNumber() {
+		return phoneNumber;
+	}
+	public void setPhoneNumber(int phoneNumber) {
+		this.phoneNumber = phoneNumber;
+	}
+	public String getStreet() {
+		return street;
+	}
+	public void setStreet(String street) {
+		this.street = street;
+	}
+	public String getCity() {
+		return city;
+	}
+	public void setCity(String city) {
+		this.city = city;
+	}
 	public List<RoleEntity> getRoles() {
 		return roles;
 	}
