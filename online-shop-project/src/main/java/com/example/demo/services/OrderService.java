@@ -18,7 +18,7 @@ public interface OrderService {
 
 	public void removeById(Long id, String name);
 	
-	public void buyProducts(String name);
+	public OrderServiceModel buyProducts(String name);
 	
 	public List<OrderServiceModel> getPaidOrders();
 	

@@ -13,7 +13,7 @@ public interface ProductService {
 
 	List<ProductServiceModel> getAllProducts();
 
-	void addProduct(ProductAddBindingModel productAddBindingModel);
+	ProductServiceModel addProduct(ProductAddBindingModel productAddBindingModel);
 
 	List<ProductServiceModel> findAllProductsByCategoryName(CategoryTypeEnum categoryName);
 

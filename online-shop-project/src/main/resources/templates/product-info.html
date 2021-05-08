@@ -16,15 +16,44 @@
   <!-- Custom styles for this template -->
   <link href="/css/shop-homepage.css" rel="stylesheet">
   
-  <script type="text/javascript">
+  <script>
+  
+  function toggle() {
+	    let btn = document.getElementsByClassName('button')[0];
+	    let info = document.getElementById('extra')
 
-$(function () {
-	  $('[data-toggle="tooltip"]').tooltip()
-	})
+	    if (btn.textContent === 'More details') {
+	        info.style.display = 'block'
+			console.log(info.style.display)
+	        btn.textContent = 'Less details'
+	    } else {
+	        btn.textContent = 'More details'
+	        info.style.display = 'none'
+			console.log(info.style.display)
+	    }
+
+	    
+	    console.log(info)
+
+	}
 
 </script>
-  
+
   <style>
+  
+.button {
+    float: right;
+    background: #393636;
+    padding: 0.1em 1em 0.1em 1em;
+    color: white;
+    cursor: pointer;
+    text-transform: uppercase;
+    font-weight: bold;
+    letter-spacing: 3px;
+    position: absolute;
+}
+
+
   
   body{margin-top:20px;
 }
@@ -252,11 +281,16 @@ $(function () {
                       Leopard Shirt Dress
                   </a>
               </h4>
-              <p>
+             <div>
+              <div> </div>
+            <div id="extra" style="display: none;">
+              <p >
                   Praesent ac condimentum felis. Nulla at nisl orci, at dignissim dolor, The best product descriptions address your ideal buyer directly and personally. The best product descriptions address your ideal buyer directly and personally.
               </p>
+              </div>
               <div class="product_meta">
                   <span class="posted_in"> <strong>Categories:</strong> <a rel="tag" href="/products/tea" th:text="*{category.name}">Jackets</a><!-- , <a rel="tag" href="#">Men</a>, <a rel="tag" href="#">Shirts</a>, <a rel="tag" href="#">T-shirt</a>. --></span>
+              	  <span class="button" onclick="toggle()">More details</span>
                   <span class="tagged_as"><strong>Tags:</strong> <a rel="tag" href="#">mens</a>, <a rel="tag" href="#">womens</a>.</span>
               </div>
               <div class="m-bot15"> <strong>Price : </strong> <!--   <span class="amount-old">$544</span> --> <span class="pro-price" th:text="|$ *{price}|"> $300.00</span></div>
@@ -270,10 +304,10 @@ $(function () {
                   <button class="btn btn-round btn-danger" type="submit" data-toggle="tooltip" data-placement="top" title="Add element to shopping cart"><i class="fa fa-shopping-cart" ></i> Add to Cart</button>
              </a>		
               </p>
-             
+              <script src="accordion.js"></script>
           </div>
       </div>
-      
+      </div>
      
       
       

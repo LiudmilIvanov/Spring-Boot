@@ -149,7 +149,7 @@ public class OrderServiceImpl implements OrderService{
 
 	@Override
 	@Transactional
-	public void buyProducts(String name) {
+	public OrderServiceModel buyProducts(String name) {
 		List<OrderEntity> orders = orderRepository
 				.findAllByUserAndIfPaidFalse(modelMapper
 						.map(userService.findByName(name), UserEntity.class));
@@ -157,6 +157,9 @@ public class OrderServiceImpl implements OrderService{
 		if (!orders.isEmpty()) {
 			orders.get(0).setIfPaid(true);
 		}
+		OrderServiceModel order = modelMapper.map(orders.get(0), OrderServiceModel.class);
+		System.out.println();
+		return order;
 		
 	}
 

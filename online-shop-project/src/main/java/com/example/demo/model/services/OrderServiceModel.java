@@ -21,6 +21,7 @@ public class OrderServiceModel {
 	private UserEntity user;
 
 	
+	
 	public Long getId() {
 		return id;
 	}

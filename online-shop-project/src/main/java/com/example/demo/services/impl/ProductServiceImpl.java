@@ -53,12 +53,17 @@ public class ProductServiceImpl implements ProductService{
 
 	@Override
 	@Transactional
-	public void addProduct(ProductAddBindingModel productAddBindingModel) {
+	public ProductServiceModel addProduct(ProductAddBindingModel productAddBindingModel) {
 		ProductEntity product =  modelMapper.map(productAddBindingModel, ProductEntity.class);
 		product.setCategory(categoryRepository.findByName(productAddBindingModel.getCategory()));
 		product.setQuantity(1);
 		
 		productRepository.save(product);
+		
+		ProductServiceModel productServiceModel = modelMapper.map(product, ProductServiceModel.class);
+			System.out.println();
+		
+		return productServiceModel;
 	}
 
 
