@@ -20,35 +20,27 @@ import com.example.demo.services.ProductService;
 public class HomeController {
 
 	private final ProductService productService;
-	
+
 	@Autowired
 	public HomeController(ProductService productService) {
 		this.productService = productService;
 	}
 
 	@GetMapping("/")
-	@ExceptionHandler({EntityNotFoundException.class})
+	@ExceptionHandler({ EntityNotFoundException.class })
 	public String indexPage(Model model) {
-		
 		model.addAttribute("productOne", productService.getRandomProduct());
 		model.addAttribute("productTwo", productService.getRandomProduct());
 		model.addAttribute("productThree", productService.getRandomProduct());
 		model.addAttribute("productFour", productService.getRandomProduct());
 		model.addAttribute("productFive", productService.getRandomProduct());
-		
+
 		return "home";
 	}
-	
 
-	
-	
-	
 	@GetMapping("/home")
 	public String home() {
 		return "home";
 	}
 
-
-	
-	}
-	
+}

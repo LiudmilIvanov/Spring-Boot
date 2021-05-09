@@ -8,30 +8,12 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>Shop Homepage - Start Bootstrap Template</title>
-
+  <title></title>
   <!-- Bootstrap core CSS -->
   <link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-
   <!-- Custom styles for this template -->
   <link href="/css/shop-homepage.css" rel="stylesheet">
-
-<style>
-
-/*body {
-  background: #eecda3;
-  background: -webkit-linear-gradient(to right, #eecda3, #ef629f);
-  background: linear-gradient(to right, #eecda3, #ef629f);
-  min-height: 100vh;
-}*/
-
-.dropdown {
- position: auto;
-}
-
-
-
-</style>
+  <link href="/css/details.css" rel="stylesheet">
 
 </head>
 
@@ -39,37 +21,12 @@
 
   <!-- Navigation -->
   <nav th:replace="fragments/fragment :: navigation('profile')" class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-    <div class="container">
-      <a class="navbar-brand" href="#">Start Bootstrap</a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarResponsive">
-        <ul class="navbar-nav ml-auto">
-          <li class="nav-item active">
-            <a class="nav-link" href="#">Home
-              <span class="sr-only">(current)</span>
-            </a>
-          </li>
-          
-          <li class="nav-item">
-            <a class="nav-link" href="#">About</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Services</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Contact</a>
-          </li>
-        </ul>
-      </div>
-    </div>
+    
   </nav>
   
   
   
   <div class="px-4 px-lg-0">
-  <!-- For demo purpose -->
   <div class="container text-white py-5 text-center">
     <h1 class="display-4">Bootstrap 4 shopping cart</h1>
     <p class="lead mb-0">Build a fully structred shopping cart page using Bootstrap 4. </p>
@@ -77,7 +34,6 @@
             <u>Bootstrapious</u></a>
     </p>
   </div>
-  <!-- End -->
 
   <div  class="pb-5">
     <div class="container">
@@ -168,11 +124,7 @@
   </div>
 </div>
 
- <footer th:replace="fragments/fragment :: footer" class="py-5 bg-dark">
-    <div class="container">
-      <p class="m-0 text-center text-white">Copyright &copy; Your Website 2020</p>
-    </div>
-    <!-- /.container -->
+   <footer th:replace="fragments/fragment :: footer" class="py-5 bg-dark">
   </footer>
   
   

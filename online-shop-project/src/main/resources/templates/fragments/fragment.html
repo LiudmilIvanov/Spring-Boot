@@ -53,15 +53,15 @@
 
                         </div>
                     </li>
-          <li class="nav-item">
+          <!-- <li class="nav-item">
             <a class="nav-link" href="#">About</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#">Services</a>
-          </li>
+          </li>-->
           <li class="nav-item">
-            <a class="nav-link" href="#">Contact</a>
-          </li>
+            <a class="nav-link" href="/contactus">Contact</a>
+          </li> 
           <li sec:authorize="isAuthenticated()" th:classappend="${activeTab == 'profile'}? 'active'" class="nav-item">
             <a class="nav-link" href="/user/profile">Profile</a>
           </li>
